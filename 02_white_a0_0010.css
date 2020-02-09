@@ -1,0 +1,820 @@
+* body,* img,* div,* p{
+ _behavior: url("cssassist.htc");
+}
+#footer{
+ clear: both;
+ width: auto;
+ display: none;
+ min-height: 16px;
+ margin: 0px;
+ padding: 4px 14px 3px;
+ background: #ffffff left top;
+ text-align: right;
+ font-style: normal;
+ font-weight: normal;
+ color: #000000;
+}
+#header{
+ clear: both;
+ width: auto;
+ display: none;
+ min-height: 16px;
+ margin: 0px;
+ padding: 5px 14px 4px;
+ background: left top;
+ text-align: right;
+ font-style: normal;
+ font-weight: normal;
+ color: #000000;
+}
+#main{
+ float: none;
+ width: auto;
+ min-height: 560px;
+ display: block;
+ margin: 10px;
+ padding: 10px;
+ background: #ffffff left top;
+ text-align: left;
+ font-style: normal;
+ font-weight: normal;
+ color: #000000;
+}
+#menubar{
+ clear: both;
+ width: auto;
+ display: none;
+ min-height: 16px;
+ margin: 0px;
+ padding: 4px 0px 3px;
+ background: #ffffff left top;
+ text-align: left;
+ font-style: normal;
+ font-weight: bold;
+ color: #000000;
+}
+#menubar .button{
+ margin: 0px;
+ padding: 5px 15px 4px 6px;
+}
+#menubar a.tabs:hover{
+ color: #6b78a9;
+}
+#page{
+ width: 800px;
+ margin: 0px auto;
+ min-height: auto;
+ padding: 0px;
+ background: #ffffff left top;
+ font-style: normal;
+ font-weight: normal;
+ font-size: 10pt;
+ font-family: "MS UI Gothic";
+ color: #000000;
+ min-width: 600px;
+}
+#side1{
+ float: left;
+ width: 180px;
+ display: none;
+ min-height: 560px;
+ margin: 10px 0px;
+ padding: 10px;
+ background: #ffffff left top;
+ text-align: left;
+ font-style: normal;
+ font-weight: normal;
+ color: #000000;
+}
+#side1 .list{
+ text-align: left;
+ font: 1em/120% "MS UI Gothic";
+ margin: 3px 0px 3px 15px;
+ width: 185px;
+ height: 20px;
+}
+#side1 .list a{
+ background: #ffffff;
+}
+#side1 .list a:hover{
+ background: #efefef;
+ color: #0600b3;
+}
+#side2{
+ float: right;
+ width: 180px;
+ display: none;
+ min-height: 560px;
+ margin: 10px 0px;
+ padding: 10px;
+ background: #ffffff left top;
+ text-align: left;
+ font-style: normal;
+ font-weight: normal;
+ color: #000000;
+}
+#title{
+ clear: both;
+ width: auto;
+ display: none;
+ min-height: 50px;
+ margin: 0px;
+ padding: 30px 16px 10px;
+ background: #ffffff right top;
+ text-align: left;
+ font-style: normal;
+ font-weight: normal;
+ font-size: 18pt;
+ color: #000000;
+}
+.address1{
+ padding: 0px 0px 0px 20px;
+ background: url("a0_0010_mailbtn01.png") no-repeat left top;
+ font-style: normal;
+ font-weight: bold;
+ font-size: 11pt;
+ color: #000000;
+ text-decoration: none;
+ text-transform: none;
+}
+.address2{
+ padding: 0px 0px 0px 20px;
+ background: url("a0_0010_mailbtn02.png") no-repeat left top;
+ font-style: normal;
+ font-weight: bold;
+ font-size: 11pt;
+ color: #808080;
+ text-decoration: none;
+ text-transform: none;
+}
+.column1{
+ margin: 10px 0px;
+ padding: 10px;
+ background: #ffffff left top;
+ font-style: normal;
+ font-size: 10pt;
+ color: #000000;
+ text-decoration: none;
+ text-transform: none;
+ border: 2px solid #000000;
+}
+.column2{
+ margin: 10px 0px;
+ padding: 10px;
+ background: #ffffff left top;
+ font-style: normal;
+ font-size: 10pt;
+ color: #808080;
+ text-decoration: none;
+ text-transform: none;
+ border: 2px solid #808080;
+}
+.date1{
+ font-style: normal;
+ font-weight: bold;
+ font-size: 8pt;
+ color: #000000;
+ text-decoration: none;
+ text-transform: none;
+}
+.date2{
+ font-style: normal;
+ font-weight: bold;
+ font-size: 8pt;
+ color: #808080;
+ text-decoration: none;
+ text-transform: none;
+}
+.hide{
+ display: none;
+}
+.horzmenu2 .mainmenuitemcurrent .mainmenuitemlink{
+ color: #000000;
+}
+.horzmenu2 .mainmenuitemcurrent .mainmenuitemlink:link{
+ color: #000000;
+}
+.horzmenu2 .mainmenuitemcurrent .mainmenuitemlink:visited{
+ color: #000000;
+}
+.horzmenu3 .mainmenuitemcurrent .mainmenuitemlink{
+ color: #000000;
+}
+.horzmenu3 .mainmenuitemcurrent .mainmenuitemlink:link{
+ color: #000000;
+}
+.horzmenu3 .mainmenuitemcurrent .mainmenuitemlink:visited{
+ color: #000000;
+}
+.horzmenu4 .mainmenuitemcurrent .mainmenuitemlink{
+ color: #000000;
+}
+.horzmenu4 .mainmenuitemcurrent .mainmenuitemlink:link{
+ color: #000000;
+}
+.horzmenu4 .mainmenuitemcurrent .mainmenuitemlink:visited{
+ color: #000000;
+}
+.horzmenu5 .mainmenuitemcurrent .mainmenuitemlink{
+ color: #000000;
+}
+.horzmenu5 .mainmenuitemcurrent .mainmenuitemlink:link{
+ color: #000000;
+}
+.horzmenu5 .mainmenuitemcurrent .mainmenuitemlink:visited{
+ color: #000000;
+}
+.horzmenu6 .mainmenuitemcurrent .mainmenuitemlink{
+ color: #000000;
+}
+.horzmenu6 .mainmenuitemcurrent .mainmenuitemlink:link{
+ color: #000000;
+}
+.horzmenu6 .mainmenuitemcurrent .mainmenuitemlink:visited{
+ color: #000000;
+}
+.horzmenu7 .mainmenuitemcurrent .mainmenuitemlink{
+ color: #000000;
+}
+.horzmenu7 .mainmenuitemcurrent .mainmenuitemlink:link{
+ color: #000000;
+}
+.horzmenu7 .mainmenuitemcurrent .mainmenuitemlink:visited{
+ color: #000000;
+}
+.horzmenu8 .mainmenuitemcurrent .mainmenuitemlink{
+ color: #000000;
+}
+.horzmenu8 .mainmenuitemcurrent .mainmenuitemlink:link{
+ color: #000000;
+}
+.horzmenu8 .mainmenuitemcurrent .mainmenuitemlink:visited{
+ color: #000000;
+}
+.horzmenu9 .mainmenuitemcurrent .mainmenuitemlink{
+ color: #000000;
+}
+.horzmenu9 .mainmenuitemcurrent .mainmenuitemlink:link{
+ color: #000000;
+}
+.horzmenu9 .mainmenuitemcurrent .mainmenuitemlink:visited{
+ color: #000000;
+}
+.HPZAutoMarginAdjuster{
+ overflow-x: hidden;
+}
+.hpzlarge1{
+ font-style: normal;
+ font-weight: bold;
+ font-size: 18pt;
+ color: #000000;
+ text-decoration: none;
+ text-transform: none;
+}
+.hpzmidium1{
+ font-style: normal;
+ font-weight: bold;
+ font-size: 15pt;
+ color: #000000;
+ text-decoration: none;
+ text-transform: none;
+}
+.hpzsmall1{
+ font-style: normal;
+ font-weight: bold;
+ font-size: 12pt;
+ color: #000000;
+ text-decoration: none;
+ text-transform: none;
+}
+.line1{
+ margin: 5px 0px;
+ padding: 5px 10px;
+ background: #ffffff left top;
+ font-style: normal;
+ font-weight: bold;
+ font-size: 11pt;
+ color: #000000;
+ text-decoration: none;
+ text-transform: none;
+ border-top: 2px solid #000000;
+ border-bottom: 2px solid #000000;
+}
+.line2{
+ margin: 5px 0px;
+ padding: 5px 10px;
+ background: #ffffff left top;
+ font-style: normal;
+ font-weight: bold;
+ font-size: 11pt;
+ color: #808080;
+ text-decoration: none;
+ text-transform: none;
+ border-top: 2px solid #808080;
+ border-bottom: 2px solid #808080;
+}
+.link1{
+ padding: 0px 0px 0px 20px;
+ background: url("a0_0010_linkbtn01.png") no-repeat left top;
+ font-style: normal;
+ font-weight: bold;
+ font-size: 11pt;
+ color: #000000;
+ text-decoration: none;
+ text-transform: none;
+}
+.link2{
+ padding: 0px 0px 0px 20px;
+ background: url("a0_0010_linkbtn02.png") no-repeat left top;
+ font-style: normal;
+ font-weight: bold;
+ font-size: 11pt;
+ color: #808080;
+ text-decoration: none;
+ text-transform: none;
+}
+.mainmenu .mainmenuitem,.horzmenu2 .mainmenuitem,.horzmenu3 .mainmenuitem,.horzmenu4 .mainmenuitem,.horzmenu5 .mainmenuitem,.horzmenu6 .mainmenuitem,.horzmenu7 .mainmenuitem,.horzmenu8 .mainmenuitem,.horzmenu9 .mainmenuitem{
+ float: left;
+ display: inline;
+}
+.mainmenu .mainmenuitemcenter,.horzmenu2 .mainmenuitemcenter,.horzmenu3 .mainmenuitemcenter,.horzmenu4 .mainmenuitemcenter,.horzmenu5 .mainmenuitemcenter,.horzmenu6 .mainmenuitemcenter,.horzmenu7 .mainmenuitemcenter,.horzmenu8 .mainmenuitemcenter,.horzmenu9 .mainmenuitemcenter{
+ float: left;
+ display: inline;
+}
+.mainmenu .mainmenuitemcurrent .mainmenuitemlink{
+ color: #000000;
+}
+.mainmenu .mainmenuitemcurrent .mainmenuitemlink:link{
+ color: #000000;
+}
+.mainmenu .mainmenuitemcurrent .mainmenuitemlink:visited{
+ color: #000000;
+}
+.mainmenu .mainmenuitemlink{
+ white-space: pre;
+}
+.mainmenu .mainmenuitemlink,.horzmenu2 .mainmenuitemlink,.horzmenu3 .mainmenuitemlink,.horzmenu4 .mainmenuitemlink,.horzmenu5 .mainmenuitemlink,.horzmenu6 .mainmenuitemlink,.horzmenu7 .mainmenuitemlink,.horzmenu8 .mainmenuitemlink,.horzmenu9 .mainmenuitemlink{
+ float: left;
+ text-decoration: none;
+ margin: 0px;
+ white-space: pre;
+ text-align: left;
+ font-style: normal;
+ font-weight: bold;
+ color: #000000;
+ padding: 0px 20px;
+}
+.mainmenu .mainmenuitemlink:link{
+ color: #000000;
+}
+.mainmenu .mainmenuitemlink:visited{
+ color: #000000;
+}
+.mainmenu .mainmenuitemlink:hover,.horzmenu2 .mainmenuitemlink:hover,.horzmenu3 .mainmenuitemlink:hover,.horzmenu4 .mainmenuitemlink:hover,.horzmenu5 .mainmenuitemlink:hover,.horzmenu6 .mainmenuitemlink:hover,.horzmenu7 .mainmenuitemlink:hover,.horzmenu8 .mainmenuitemlink:hover,.horzmenu9 .mainmenuitemlink:hover{
+ color: #000000;
+}
+.mainmenu .mainmenuitemright,.horzmenu2 .mainmenuitemright,.horzmenu3 .mainmenuitemright,.horzmenu4 .mainmenuitemright,.horzmenu5 .mainmenuitemright,.horzmenu6 .mainmenuitemright,.horzmenu7 .mainmenuitemright,.horzmenu8 .mainmenuitemright,.horzmenu9 .mainmenuitemright{
+ float: left;
+ display: inline;
+}
+.mainmenu :link,.horzmenu2 :link,.horzmenu3 :link,.horzmenu4 :link,.horzmenu5 :link,.horzmenu6 :link,.horzmenu7 :link,.horzmenu8 :link,.horzmenu9 :link{
+ color: #000000;
+}
+.mainmenu :visited,.horzmenu2 :visited,.horzmenu3 :visited,.horzmenu4 :visited,.horzmenu5 :visited,.horzmenu6 :visited,.horzmenu7 :visited,.horzmenu8 :visited,.horzmenu9 :visited{
+ color: #000000;
+}
+.mainmenu :hover,.horzmenu2 :hover,.horzmenu3 :hover,.horzmenu4 :hover,.horzmenu5 :hover,.horzmenu6 :hover,.horzmenu7 :hover,.horzmenu8 :hover,.horzmenu9 :hover{
+ color: #000000;
+}
+.mainmenu li,.horzmenu2 li,.horzmenu3 li,.horzmenu4 li,.horzmenu5 li,.horzmenu6 li,.horzmenu7 li,.horzmenu8 li,.horzmenu9 li{
+ float: left;
+ display: inline;
+ padding: 0px;
+}
+.mainmenu ul,.horzmenu2 ul,.horzmenu3 ul,.horzmenu4 ul,.horzmenu5 ul,.horzmenu6 ul,.horzmenu7 ul,.horzmenu8 ul,.horzmenu9 ul{
+ float: left;
+ list-style: none;
+ margin: 0px;
+ padding: 0px;
+}
+.mainmenu ul.pulldownmenu a,.horzmenu2 ul.pulldownmenu a,.horzmenu3 ul.pulldownmenu a,.horzmenu4 ul.pulldownmenu a,.horzmenu5 ul.pulldownmenu a,.horzmenu6 ul.pulldownmenu a,.horzmenu7 ul.pulldownmenu a,.horzmenu8 ul.pulldownmenu a,.horzmenu9 ul.pulldownmenu a{
+ text-decoration: none;
+}
+.mainmenu ul.pulldownmenu li,.horzmenu2 ul.pulldownmenu li,.horzmenu3 ul.pulldownmenu li,.horzmenu4 ul.pulldownmenu li,.horzmenu5 ul.pulldownmenu li,.horzmenu6 ul.pulldownmenu li,.horzmenu7 ul.pulldownmenu li,.horzmenu8 ul.pulldownmenu li,.horzmenu9 ul.pulldownmenu li{
+ margin: 0px;
+ padding: 5px;
+ clear: both;
+ white-space: pre;
+ border-top: none;
+ border-right: 1px;
+ border-bottom: 1px solid #ffffff;
+ border-left: 1px;
+}
+.mainmenu ul.pulldownmenu,.horzmenu2 ul.pulldownmenu,.horzmenu3 ul.pulldownmenu,.horzmenu4 ul.pulldownmenu,.horzmenu5 ul.pulldownmenu,.horzmenu6 ul.pulldownmenu,.horzmenu7 ul.pulldownmenu,.horzmenu8 ul.pulldownmenu,.horzmenu9 ul.pulldownmenu{
+ display: none;
+ list-style: none;
+ position: absolute;
+ margin: 0px;
+ padding: 0px;
+ text-decoration: none;
+ background-color: #ffffff;
+ border: 1px solid #dcdcdc;
+}
+.mainmenu,.horzmenu2,.horzmenu3,.horzmenu4,.horzmenu5,.horzmenu6,.horzmenu7,.horzmenu8,.horzmenu9{
+ margin: 0px;
+ padding: 0px;
+ overflow: auto;
+ color: #000000;
+}
+.submenu .submenuitem .submenuitemcenter,.vertmenu2 .submenuitem .submenuitemcenter,.vertmenu3 .submenuitem .submenuitemcenter,.vertmenu4 .submenuitem .submenuitemcenter,.vertmenu5 .submenuitem .submenuitemcenter,.vertmenu6 .submenuitem .submenuitemcenter,.vertmenu7 .submenuitem .submenuitemcenter,.vertmenu8 .submenuitem .submenuitemcenter,.vertmenu9 .submenuitem .submenuitemcenter{
+ float: left;
+ display: inline;
+}
+.submenu .submenuitem .submenuitemright,.vertmenu2 .submenuitem .submenuitemright,.vertmenu3 .submenuitem .submenuitemright,.vertmenu4 .submenuitem .submenuitemright,.vertmenu5 .submenuitem .submenuitemright,.vertmenu6 .submenuitem .submenuitemright,.vertmenu7 .submenuitem .submenuitemright,.vertmenu8 .submenuitem .submenuitemright,.vertmenu9 .submenuitem .submenuitemright{
+ float: left;
+ display: inline;
+}
+.submenu .submenuitem,.vertmenu2 .submenuitem,.vertmenu3 .submenuitem,.vertmenu4 .submenuitem,.vertmenu5 .submenuitem,.vertmenu6 .submenuitem,.vertmenu7 .submenuitem,.vertmenu8 .submenuitem,.vertmenu9 .submenuitem{
+ float: left;
+}
+.submenu .submenuitem:hover .submenuitemcenter,.vertmenu2 .submenuitem:hover .submenuitemcenter,.vertmenu3 .submenuitem:hover .submenuitemcenter,.vertmenu4 .submenuitem:hover .submenuitemcenter,.vertmenu5 .submenuitem:hover .submenuitemcenter,.vertmenu6 .submenuitem:hover .submenuitemcenter,.vertmenu7 .submenuitem:hover .submenuitemcenter,.vertmenu8 .submenuitem:hover .submenuitemcenter,.vertmenu9 .submenuitem:hover .submenuitemcenter,.submenu .submenuitemcurrent .submenuitem .submenuitemcenter,.vertmenu2 .submenuitemcurrent .submenuitem .submenuitemcenter,.vertmenu3 .submenuitemcurrent .submenuitem .submenuitemcenter,.vertmenu4 .submenuitemcurrent .submenuitem .submenuitemcenter,.vertmenu5 .submenuitemcurrent .submenuitem .submenuitemcenter,.vertmenu6 .submenuitemcurrent .submenuitem .submenuitemcenter,.vertmenu7 .submenuitemcurrent .submenuitem .submenuitemcenter,.vertmenu8 .submenuitemcurrent .submenuitem .submenuitemcenter,.vertmenu9 .submenuitemcurrent .submenuitem .submenuitemcenter{
+ display: inline;
+}
+.submenu .submenuitem:hover .submenuitemright,.vertmenu2 .submenuitem:hover .submenuitemright,.vertmenu3 .submenuitem:hover .submenuitemright,.vertmenu4 .submenuitem:hover .submenuitemright,.vertmenu5 .submenuitem:hover .submenuitemright,.vertmenu6 .submenuitem:hover .submenuitemright,.vertmenu7 .submenuitem:hover .submenuitemright,.vertmenu8 .submenuitem:hover .submenuitemright,.vertmenu9 .submenuitem:hover .submenuitemright,.submenu .submenuitemcurrent .submenuitem .submenuitemright,.vertmenu2 .submenuitemcurrent .submenuitem .submenuitemright,.vertmenu3 .submenuitemcurrent .submenuitem .submenuitemright,.vertmenu4 .submenuitemcurrent .submenuitem .submenuitemright,.vertmenu5 .submenuitemcurrent .submenuitem .submenuitemright,.vertmenu6 .submenuitemcurrent .submenuitem .submenuitemright,.vertmenu7 .submenuitemcurrent .submenuitem .submenuitemright,.vertmenu8 .submenuitemcurrent .submenuitem .submenuitemright,.vertmenu9 .submenuitemcurrent .submenuitem .submenuitemright{
+ display: inline;
+}
+.submenu .submenuitemcurrent .submenuitem .submenuitemlink{
+ color: #000000;
+}
+.submenu .submenuitemcurrent .submenuitem .submenuitemlink:link{
+ color: #000000;
+}
+.submenu .submenuitemcurrent .submenuitem .submenuitemlink:visited{
+ color: #000000;
+}
+.submenu .submenuitemlink,.vertmenu2 .submenuitemlink,.vertmenu3 .submenuitemlink,.vertmenu4 .submenuitemlink,.vertmenu5 .submenuitemlink,.vertmenu6 .submenuitemlink,.vertmenu7 .submenuitemlink,.vertmenu8 .submenuitemlink,.vertmenu9 .submenuitemlink{
+ float: left;
+ text-decoration: none;
+ margin: 0px;
+ text-align: left;
+ font-style: normal;
+ font-weight: bold;
+ color: #000000;
+ padding: 0px 0px 5px;
+}
+.submenu .submenuitemlink:link,.vertmenu2 .submenuitemlink:link,.vertmenu3 .submenuitemlink:link,.vertmenu4 .submenuitemlink:link,.vertmenu5 .submenuitemlink:link,.vertmenu6 .submenuitemlink:link,.vertmenu7 .submenuitemlink:link,.vertmenu8 .submenuitemlink:link,.vertmenu9 .submenuitemlink:link{
+ color: #000000;
+}
+.submenu .submenuitemlink:visited,.vertmenu2 .submenuitemlink:visited,.vertmenu3 .submenuitemlink:visited,.vertmenu4 .submenuitemlink:visited,.vertmenu5 .submenuitemlink:visited,.vertmenu6 .submenuitemlink:visited,.vertmenu7 .submenuitemlink:visited,.vertmenu8 .submenuitemlink:visited,.vertmenu9 .submenuitemlink:visited{
+ color: #000000;
+}
+.submenu .submenuitemlink:hover,.vertmenu2 .submenuitemlink:hover,.vertmenu3 .submenuitemlink:hover,.vertmenu4 .submenuitemlink:hover,.vertmenu5 .submenuitemlink:hover,.vertmenu6 .submenuitemlink:hover,.vertmenu7 .submenuitemlink:hover,.vertmenu8 .submenuitemlink:hover,.vertmenu9 .submenuitemlink:hover{
+ color: #000000;
+}
+.submenu li,.vertmenu2 li,.vertmenu3 li,.vertmenu4 li,.vertmenu5 li,.vertmenu6 li,.vertmenu7 li,.vertmenu8 li,.vertmenu9 li{
+ clear: both;
+ margin: 0px;
+}
+.submenu ul,.vertmenu2 ul,.vertmenu3 ul,.vertmenu4 ul,.vertmenu5 ul,.vertmenu6 ul,.vertmenu7 ul,.vertmenu8 ul,.vertmenu9 ul{
+ float: left;
+ list-style: none;
+ margin: 0px;
+ padding: 0px;
+}
+.submenu,.vertmenu2,.vertmenu3,.vertmenu4,.vertmenu5,.vertmenu6,.vertmenu7,.vertmenu8,.vertmenu9{
+ overflow: hidden;
+ margin: 0px;
+ padding: 0px;
+}
+.vertmenu2 .submenuitemcurrent .submenuitem .submenuitemlink{
+ color: #000000;
+}
+.vertmenu2 .submenuitemcurrent .submenuitem .submenuitemlink:link{
+ color: #000000;
+}
+.vertmenu2 .submenuitemcurrent .submenuitem .submenuitemlink:visited{
+ color: #000000;
+}
+.vertmenu3 .submenuitemcurrent .submenuitem .submenuitemlink{
+ color: #000000;
+}
+.vertmenu3 .submenuitemcurrent .submenuitem .submenuitemlink:link{
+ color: #000000;
+}
+.vertmenu3 .submenuitemcurrent .submenuitem .submenuitemlink:visited{
+ color: #000000;
+}
+.vertmenu4 .submenuitemcurrent .submenuitem .submenuitemlink{
+ color: #000000;
+}
+.vertmenu4 .submenuitemcurrent .submenuitem .submenuitemlink:link{
+ color: #000000;
+}
+.vertmenu4 .submenuitemcurrent .submenuitem .submenuitemlink:visited{
+ color: #000000;
+}
+.vertmenu5 .submenuitemcurrent .submenuitem .submenuitemlink{
+ color: #000000;
+}
+.vertmenu5 .submenuitemcurrent .submenuitem .submenuitemlink:link{
+ color: #000000;
+}
+.vertmenu5 .submenuitemcurrent .submenuitem .submenuitemlink:visited{
+ color: #000000;
+}
+.vertmenu6 .submenuitemcurrent .submenuitem .submenuitemlink{
+ color: #000000;
+}
+.vertmenu6 .submenuitemcurrent .submenuitem .submenuitemlink:link{
+ color: #000000;
+}
+.vertmenu6 .submenuitemcurrent .submenuitem .submenuitemlink:visited{
+ color: #000000;
+}
+.vertmenu7 .submenuitemcurrent .submenuitem .submenuitemlink{
+ color: #000000;
+}
+.vertmenu7 .submenuitemcurrent .submenuitem .submenuitemlink:link{
+ color: #000000;
+}
+.vertmenu7 .submenuitemcurrent .submenuitem .submenuitemlink:visited{
+ color: #000000;
+}
+.vertmenu8 .submenuitemcurrent .submenuitem .submenuitemlink{
+ color: #000000;
+}
+.vertmenu8 .submenuitemcurrent .submenuitem .submenuitemlink:link{
+ color: #000000;
+}
+.vertmenu8 .submenuitemcurrent .submenuitem .submenuitemlink:visited{
+ color: #000000;
+}
+.vertmenu9 .submenuitemcurrent .submenuitem .submenuitemlink{
+ color: #000000;
+}
+.vertmenu9 .submenuitemcurrent .submenuitem .submenuitemlink:link{
+ color: #000000;
+}
+.vertmenu9 .submenuitemcurrent .submenuitem .submenuitemlink:visited{
+ color: #000000;
+}
+a{
+ color: #000000;
+}
+a:visited{
+ color: #000000;
+}
+a:hover{
+ color: #000000;
+}
+body{
+ margin: 0px;
+ background: #ffffff left top;
+ -webkit-text-size-adjust: none;
+}
+h1{
+ margin: 0px;
+ font-weight: bold;
+ font-size: 20pt;
+ text-decoration: none;
+ text-transform: none;
+ line-height: 120%;
+}
+h2{
+ margin: 0px;
+ font-weight: bold;
+ font-size: 15pt;
+ text-decoration: none;
+ text-transform: none;
+ line-height: 120%;
+}
+h3{
+ margin: 0px;
+ font-style: italic;
+ font-size: 11.7pt;
+ text-decoration: none;
+ text-transform: none;
+ line-height: 120%;
+}
+h4{
+ margin: 0px;
+ font-weight: bold;
+ font-size: 10pt;
+ text-decoration: none;
+ text-transform: none;
+ line-height: 120%;
+}
+h5{
+ margin: 0px;
+ font-style: italic;
+ font-size: 8.3pt;
+ text-decoration: none;
+ text-transform: none;
+ line-height: 117%;
+}
+h6{
+ margin: 0px;
+ font-weight: bold;
+ font-size: 6.7pt;
+ text-decoration: none;
+ text-transform: none;
+ line-height: 120%;
+}
+hr.horizon1{
+ padding: 0px;
+ height: 2px;
+ border: 1px solid #000000;
+}
+hr.horizon2{
+ padding: 0px;
+ height: 2px;
+ border: 1px solid #808080;
+}
+hr.horizon3{
+ padding: 0px;
+ height: 1px;
+ border: 1px dashed #000000;
+}
+hr.horizon4{
+ padding: 0px;
+ height: 2px;
+ border: 1px dashed #808080;
+}
+table.table1{
+ border-collapse: collapse;
+ table-layout: auto;
+ border-top: 1px solid #000000;
+ border-right: none;
+ border-bottom: none;
+ border-left: 1px solid #000000;
+}
+table.table1 td{
+ border-top: none;
+ border-right: 1px solid #000000;
+ border-bottom: 1px solid #000000;
+ border-left: none;
+}
+table.table1 th{
+ border-top: none;
+ border-right: 1px solid #000000;
+ border-bottom: 1px solid #000000;
+ border-left: none;
+}
+table.table10{
+ table-layout: auto;
+ border-collapse: separate;
+}
+table.table10 td{
+ background: #bfbfbf left top;
+}
+table.table10 th{
+ background: #8c8c8c left top;
+}
+table.table2{
+ border-collapse: collapse;
+ table-layout: auto;
+ border-top: 1px solid #000000;
+ border-right: none;
+ border-bottom: none;
+ border-left: 1px solid #000000;
+}
+table.table2 td{
+ border-top: none;
+ border-right: 1px solid #000000;
+ border-bottom: 1px solid #000000;
+ border-left: none;
+}
+table.table2 th{
+ background: #dcdcdc left top;
+ border-top: none;
+ border-right: 1px solid #000000;
+ border-bottom: 1px solid #000000;
+ border-left: none;
+}
+table.table3{
+ border-collapse: collapse;
+ table-layout: auto;
+ border-top: 1px solid #000000;
+ border-right: none;
+ border-bottom: none;
+ border-left: 1px solid #000000;
+}
+table.table3 td{
+ background: #ffffff left top;
+ border-top: none;
+ border-right: 1px solid #000000;
+ border-bottom: 1px solid #000000;
+ border-left: none;
+}
+table.table3 th{
+ background: #c0c0c0 left top;
+ border-top: none;
+ border-right: 1px solid #000000;
+ border-bottom: 1px solid #000000;
+ border-left: none;
+}
+table.table4{
+ border-collapse: collapse;
+ table-layout: auto;
+ border-top: 1px solid #000000;
+ border-right: none;
+ border-bottom: none;
+ border-left: 1px solid #000000;
+}
+table.table4 td{
+ background: #e6e6e6 left top;
+ border-top: none;
+ border-right: 1px solid #000000;
+ border-bottom: 1px solid #000000;
+ border-left: none;
+}
+table.table4 th{
+ background: #c0c0c0 left top;
+ border-top: none;
+ border-right: 1px solid #000000;
+ border-bottom: 1px solid #000000;
+ border-left: none;
+}
+table.table5{
+ border-collapse: collapse;
+ table-layout: auto;
+ border: 2px solid #000000;
+}
+table.table5 td{
+ border-top: none;
+ border-right: 1px solid #000000;
+ border-bottom: 1px solid #000000;
+ border-left: none;
+}
+table.table5 th{
+ border-top: none;
+ border-right: 1px solid #000000;
+ border-bottom: 1px solid #000000;
+ border-left: none;
+}
+table.table6{
+ border-collapse: collapse;
+ table-layout: auto;
+ border: 2px solid #000000;
+}
+table.table6 td{
+ border-top: none;
+ border-right: 1px solid #000000;
+ border-bottom: 1px solid #000000;
+ border-left: none;
+}
+table.table6 th{
+ background: #dcdcdc left top;
+ border-top: none;
+ border-right: 1px solid #000000;
+ border-bottom: 1px solid #000000;
+ border-left: none;
+}
+table.table7{
+ border-collapse: collapse;
+ table-layout: auto;
+ border: 2px solid #000000;
+}
+table.table7 td{
+ background: #ffffff left top;
+ border-top: none;
+ border-right: 1px solid #000000;
+ border-bottom: 1px solid #000000;
+ border-left: none;
+}
+table.table7 th{
+ background: #c0c0c0 left top;
+ border-top: none;
+ border-right: 1px solid #000000;
+ border-bottom: 1px solid #000000;
+ border-left: none;
+}
+table.table8{
+ border-collapse: collapse;
+ table-layout: auto;
+ border: 2px solid #000000;
+}
+table.table8 td{
+ background: #e6e6e6 left top;
+ border-top: none;
+ border-right: 1px solid #000000;
+ border-bottom: 1px solid #000000;
+ border-left: none;
+}
+table.table8 th{
+ background: #c0c0c0 left top;
+ border-top: none;
+ border-right: 1px solid #000000;
+ border-bottom: 1px solid #000000;
+ border-left: none;
+}
+table.table9{
+ table-layout: auto;
+ border-collapse: separate;
+}
+table.table9 td{
+ background: #dcdcdc left top;
+}
+table.table9 th{
+ background: #b3b3b3 left top;
+}
