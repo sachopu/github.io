@@ -6,7 +6,7 @@ function isMobile() {
     return /Android|mobile|iPad|iPhone/i.test(navigator.userAgent);
 }
 
-var interpolationFactor = 24;
+var interpolationFactor = 5;
 
 var trackedMatrix = {
     // for interpolation
@@ -29,7 +29,7 @@ var markers = {
         width: 1637,
         height: 2048,
         dpi: 215,
-        url: "DataNFT/pinball"
+        url: "../DataNFT/pinball"
     }
 };
 
@@ -53,7 +53,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     var pw, ph;
     var ox, oy;
     var worker;
-    var camera_para = "camera_para-iPhone 5 rear 640x480 1.0m.dat";
+    var camera_para = "../Data/camera_para-iPhone 5 rear 640x480 1.0m.dat";
 
     var canvas_process = document.createElement("canvas");
     var context_process = canvas_process.getContext("2d");
@@ -89,7 +89,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     /* Load Model */
     var threeGLTFLoader = new THREE.GLTFLoader();
 
-    threeGLTFLoader.load("models/Flamingo.glb", function (gltf) {
+    threeGLTFLoader.load("./models/Flamingo.glb", function (gltf) {
             model = gltf.scene.children[0];
             model.position.z = 0;
             model.position.x = 100;
@@ -136,7 +136,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
 
         renderer.setSize(sw, sh);
 
-        worker = new Worker("js/artoolkit.worker.js");
+        worker = new Worker("./js/artoolkit.worker.js");
 
         worker.postMessage({
             type: "load",
@@ -188,7 +188,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
                     break;
                 }
             }
-            track_update();
+          
             process();
         };
     };
@@ -229,11 +229,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     };
 
     var draw = function() {
-        render_update();
-        var now = Date.now();
-        var dt = now - lasttime;
-        time += dt;
-        lasttime = now;
+
 
         if (!world) {
             root.visible = false;

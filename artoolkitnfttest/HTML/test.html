@@ -1,43 +1,33 @@
 <!DOCTYPE html>
-<html lang="ja">
-
-<!--2020/02/26 01:06:54-->
-
+<html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <meta http-equiv="Content-Script-Type" content="text/javascript">
-  <meta name="GENERATOR" content="ホームページV4">
-  <title>NFT_test - </title>
+  <meta charset="utf-8" />
+  <title>NFT_test </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="css/video-style.css" />
 </head>
 
 <body>
-  <div id="loading">
-  <img src="logo.png" alt="" border="0"> Loading, please wait</div>
-  <div id="app"></div>
+  <div id="loading" />
+  <img src="logo.gif">
+  <span class="loading-text">Loading, please wait</span>
+</div>
+
   <!--
       ==================
       CAMERA VIDEO & CANVAS
       ==================
       -->
-
     <div id="app">
       <video loop autoplay muted playsinline id="video"></video>
 
       <canvas id="canvas"></canvas>
     </div>
-    <a
-      href="https://raw.githubusercontent.com/artoolkit/artoolkit5/master/doc/Marker%20images/pinball.jpg"
-      class="ui marker"
-      target="_blank"
-    >
-      ? Marker Image
-    </a>
+
   <script language="JavaScript" type="text/javascript" src="three.min.js"></script>  
   <script language="JavaScript" type="text/javascript" src="GLTFLoader.js"></script>
   <script language="JavaScript" type="text/javascript" src="threejs_worker_gltf.js"></script>
-  <script language="JavaScript" type="text/javascript">
+  <script>
       /**
        * APP / ELEMENTS
        */
