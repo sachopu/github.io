@@ -65,7 +65,9 @@ function start( container, marker, video, input_width, input_height, canvas_draw
         antialias: true
     });
     renderer.setPixelRatio(window.devicePixelRatio);
-
+    renderer.gammaOutput = true;
+    //renderer.gammaInput =true;
+    
     var scene = new THREE.Scene();
 
     var camera = new THREE.Camera();
@@ -77,11 +79,14 @@ function start( container, marker, video, input_width, input_height, canvas_draw
 
     var light = new THREE.AmbientLight(0xffffff);
     scene.add(light);
+    
+    
 
-    var sphere = new THREE.Mesh(
+   /* var sphere = new THREE.Mesh(
         new THREE.SphereGeometry(0.5, 8, 8),
         new THREE.MeshNormalMaterial()
     );
+    */
 
     var root = new THREE.Object3D();
     scene.add(root);
@@ -89,11 +94,14 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     /* Load Model */
     var threeGLTFLoader = new THREE.GLTFLoader();
 
-    threeGLTFLoader.load("./models/Flamingo.glb", function (gltf) {
-            model = gltf.scene.children[0];
+    threeGLTFLoader.load("./models/kuma.glb", function (gltf) {
+            model = gltf.scene;
+            model.rotation.x = 0.5*Math.PI;
+            model.rotation.y = 1*Math.PI;
             model.position.z = 0;
             model.position.x = 100;
             model.position.y = 100;
+            model.scale.set(70,70,70);
 
             var animation = gltf.animations[0];
             var mixer = new THREE.AnimationMixer(model);
