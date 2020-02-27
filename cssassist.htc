@@ -1,0 +1,708 @@
+// --- IE5.5+ doDivAssist ---
+<attach event="oncontentready" onevent="doDivAssist()" />
+<script type="text/javascript">
+function doDivMinAssist(){
+	if(className == 'doDivAssist')
+		return;
+
+	var nWrapMinWidth = 0;
+	var nWrapMinHeight = 0;
+
+	var bWidthAuto = !currentStyle.width || (currentStyle.width == 'auto');
+	if(bWidthAuto && currentStyle['min-width']){
+		if(style['min-width'] && (style['min-width'] != 'auto')){
+			nWrapMinWidth = parseInt(currentStyle['min-width']);
+		}
+	}
+
+	var bHeightAuto = !currentStyle.height || (currentStyle.height == 'auto');
+	if(currentStyle.minHeight){
+		if(style.minHeight != 'auto')
+			nWrapMinHeight = parseInt(currentStyle.minHeight);
+	}
+
+	if(scrollWidth < (nWrapMinWidth + 2))
+		style.width = nWrapMinWidth + 'px';
+	if(scrollHeight < (nWrapMinHeight + 2))
+		style.height = nWrapMinHeight + 'px';
+	if((0 < nWrapMinWidth) || (0 < nWrapMinHeight)){
+		var sInnerHTML = innerHTML;
+		var	sWrap	= '<table class="doDivAssist" cellspacing="0" cellpadding="0"';
+		if(0 < nWrapMinWidth)
+			sWrap += ' width="' + nWrapMinWidth + '"';
+		else
+			sWrap += ' width="100%"';
+		if(0 < nWrapMinHeight)
+			sWrap += ' height="' + nWrapMinHeight + '"';
+		sWrap += '><tr><td valign="top">\n';
+		if(0 < nWrapMinWidth)
+			sWrap += '<div style="width:' +  nWrapMinWidth + 'px; height:0px; overflow:hidden;"><br></div>\n';
+		sWrap += sInnerHTML;
+		sWrap += '</td></tr></table>';
+		innerHTML = sWrap;
+		style['min-width'] = "auto";
+		style.minHeight = "auto";
+	}
+
+	if((currentStyle.styleFloat != "left") && (currentStyle.styleFloat != "right")){
+		var parentObj = parentNode ? parentNode : parentElement;
+		var prevObj = null;
+		for( i=0; i<parentObj.childNodes.length; i++){
+			if(tagName != 'DIV')
+				continue;
+			if(parentObj.childNodes[i].id == id){
+				if(prevObj && ((prevObj.currentStyle.styleFloat == "left") || (prevObj.currentStyle.styleFloat == "right"))){
+					if(prevObj.currentStyle.display == "none")
+						break;
+					if(prevObj.style['hpzdivassistfloat'] == 'on')
+						break;
+					style.styleFloat = "left";
+					style['hpzdivassistfloat'] = 'on';
+				}
+				break;
+			}
+			prevObj = parentObj.childNodes[i];
+		}
+	}
+}
+
+function doDivMarginAssist(){
+	// float指定されたmarginが2倍になる不具合対処
+	// 「style.display='inline';」への置き換えはホバー処理に影響を与える為使用しない。
+	if((currentStyle.styleFloat == "left") || (currentStyle.styleFloat =="right")){
+		if(currentStyle.marginLeft || currentStyle.marginRight || currentStyle.marginTop)
+			style['_display'] = 'inline';
+	}
+}
+
+function doDivAssist(){
+	if(!/MSIE (5\.5|6\.)/.test(navigator.userAgent))
+		return;
+	if((tagName == 'DIV') && !currentStyle['hpzdivassist']){
+		style['hpzdivassist'] = 'on';
+		doDivMinAssist();
+		doDivMarginAssist();
+	}
+/*
+	var pngAlphaTagNames	= {'IMG', 'P', 'DIV'};
+	for(var i=0; i<pngAlphaTagNames.length; i++){
+		for(var j=0; j<[window.document].length; j++){
+			var elements = [window.document][j].all.tags(pngAlphaTagNames[i]);
+			for(var k=0; k<elements.length; k++){
+				
+			}
+		}
+	}
+*/
+}
+</script>
+
+// --- IE5.5+ OnMouseHover ---
+<attach event="ondocumentready" handler="parseStylesheets" />
+<script type="text/javascript">
+
+var csshoverReg = /(^|\s)((([^a]([^ ]+)?)|(a([^#.][^ ]+)+)):(hover|active))|((a|input|textarea)([#.][^ ]+)?:unknown)/i,
+currentSheet, doc = window.document, hoverEvents = [], activators = {
+	onhover:{on:'onmouseover', off:'onmouseout'},
+	onactive:{on:'onmousedown', off:'onmouseup'},
+	onunknown:{on:'onfocus', off:'onblur'}
+}
+var g_regSelectors		= [];
+var g_regElementsList	= [];
+var g_loopNum = 0;
+
+function parseStylesheets(){
+	if(!/MSIE (5|6)/.test(navigator.userAgent))
+		return;
+	if(tagName != 'BODY')
+		return;
+
+	window.attachEvent('onunload', unhookHoverEvents);
+
+	// スタイルシートに定義が無ければ終了
+	if(window.document.styleSheets.length <= 0)
+		return;
+	// ホバールールの列挙とスタイルシートに別名ホバールールを追加
+	var hoverRules = [];
+	for(var i=0; i<window.document.styleSheets.length; i++){
+		hoverRules = hoverRules.concat(EnumHoverRulesAndAddOnHoverRules(window.document.styleSheets[i]));
+	}
+	// 重複しないように単一ホバーセレクターを抽出
+	var hoverSelectors	= [];
+	for(var i=0; i<hoverRules.length; i++){
+		var selector = hoverRules[i].selectorText;
+		var affected = selector.replace(/:(hover|active|unknown).*$/, '');
+		var ruleSelectors = selector.split(' ');
+		for(var j=0; j<ruleSelectors.length; j++){
+			if(!csshoverReg.test(ruleSelectors[j])){
+				continue;
+			}
+			var bHit = false;
+			for(var k=0; k<hoverSelectors.length; k++){
+				if(hoverSelectors[k] != ruleSelectors[j])
+					continue;
+				bHit = true;
+				break;
+			}
+			if(bHit)
+				continue;
+			hoverSelectors[hoverSelectors.length] = ruleSelectors[j];
+		}
+	}
+	// 抽出した単一ホバーセレクターを順に一致する要素に別名セレクタを割り当て
+	for(var i=0; i<hoverSelectors.length; i++){
+		var selector = hoverSelectors[i];
+		var pseudo = selector.replace(/[^:]+:([a-z-]+).*/i, 'on$1');
+		var newSelect = selector.replace(/(\.([a-z0-9_-]+):[a-z]+)|(:[a-z]+)/gi, '.$2' + pseudo);
+		var classname2 = (/\.([a-z0-9_-]*on(hover|active|unknown))/i).exec(newSelect)[1];
+		var affected = selector.replace(/:(hover|active|unknown).*$/, '');
+		var identify = (/\#([a-z0-9_-]+)/i).exec(affected);
+		if(identify){
+			var element = doc.getElementById(identify[1]);
+			if(element){
+				var elements = [element];
+				if(elements.length == 0)
+					continue;
+				HoverElements(elements, className2, activators[pseudo]);
+			}
+			continue;
+		}
+		var classname = (/\.([a-z0-9_-]+)/i).exec(affected);
+		var tagname = affected.replace(/(\.|\#|\:)[a-z0-9_-]+/i, '');
+		var classReg = classname ? new RegExp('\\b' + classname[1] + '\\b') : false;
+		for(var j=0; j<[doc].length; j++){
+			var elements = tagname ? [doc][j].all.tags(tagname) : [doc][j].all;
+			for(var k=0; k<elements.length; k++){
+				if(classReg && !classReg.test(elements[k].className))
+					continue;
+				new HoverElement(elements[k], classname2, activators[pseudo]);
+			}
+		}
+	}
+/*
+// 旧処理
+	var sheets = doc.styleSheets, l = sheets.length;
+	for(var i=0; i<l; i++) 
+		parseStylesheet(sheets[i]);
+*/
+}
+
+// ホバールールの列挙とスタイルシートに別名ホバールールを追加
+function EnumHoverRulesAndAddOnHoverRules(styleSheet){
+	var rsltHoverRules = [];
+	if(styleSheet.imports){
+		try{
+			for(var i=0; i<styleSheet.imports.length; i++)
+				rsltHoverRules = rsltHoverRules.concat(EnumHoverRulesAndAddOnHoverRules(styleSheets.imports[i]));
+		}catch(securityException){}
+	}
+	try{
+		var rules = styleSheet.rules;
+		for(var i=0; i<rules.length; i++){
+			if(!rules[i].style.cssText)
+				continue;
+			if(!csshoverReg.test(rules[i].selectorText))
+				continue;
+			rsltHoverRules[rsltHoverRules.length] = rules[i];
+			// ルールの追加
+			var selector	= rules[i].selectorText;
+			var pseudo		= selector.replace(/[^:]+:([a-z-]+).*/i, 'on$1');
+			var newSelector	= selector.replace(/(\.([a-z0-9_-]+):[a-z]+)|(:[a-z]+)/gi, '.$2' + pseudo);
+			styleSheet.addRule(newSelector, rules[i].style.cssText);
+		}
+	}catch(securityException){}
+	return rsltHoverRules;
+}
+
+function parseStylesheet(sheet) {
+	if(sheet.imports) {
+		try {
+			var imports = sheet.imports, l = imports.length;
+			for(var i=0; i<l; i++)
+				parseStylesheet(sheet.imports[i]);
+		} catch(securityException){}
+	}
+
+	try {
+		var rules = (currentSheet = sheet).rules, l = rules.length;
+		for(var j=0; j<l; j++)
+			parseCSSRule(rules[j]);
+	} catch(securityException){}
+}
+
+function parseCSSRule(rule) {
+	var select = rule.selectorText, style = rule.style.cssText;
+	if(!csshoverReg.test(select) || !style)
+		return;
+
+	var affected = select.replace(/:(hover|active|unknown).*$/, '');
+	var elements = getElementsBySelect(affected);
+	if(elements.length == 0)
+		return;
+
+	var pseudo = select.replace(/[^:]+:([a-z-]+).*/i, 'on$1');
+	var newSelect = select.replace(/(\.([a-z0-9_-]+):[a-z]+)|(:[a-z]+)/gi, '.$2' + pseudo);
+	var className = (/\.([a-z0-9_-]*on(hover|active|unknown))/i).exec(newSelect)[1];
+	currentSheet.addRule(newSelect, style);
+	for(var i=0; i<elements.length; i++){
+		new HoverElement(elements[i], className, activators[pseudo]);
+	}
+}
+
+function HoverElements(nodes, className, events){
+	for(var i=0; i<nodes.length; i++)
+		new HoverElement(nodes[i], className, events);
+}
+
+function HoverElement(node, className, events){
+	if(!node.hovers)
+		node.hovers = {};
+	if(node.hovers[className])
+		return;
+	node.hovers[className] = true;
+	hookHoverEvent(node, events.on, function(){node.className += ' ' + className;});
+	hookHoverEvent(node, events.off, function(){node.className = node.className.replace(new RegExp('\\s+'+className, 'g'),'');});
+}
+
+function hookHoverEvent(node, type, handler){
+	node.attachEvent(type, handler);
+	hoverEvents[hoverEvents.length] = {node:node, type:type, handler:handler};
+}
+
+function unhookHoverEvents(){
+	for(var e,i=0; i<hoverEvents.length; i++){
+		e = hoverEvents[i]; 
+		e.node.detachEvent(e.type, e.handler);
+	}
+}
+
+function getElementsBySelect(rule) {
+	var parts, nodes = [doc];
+	parts = rule.split(' ');
+	if(parts.length <= 1){
+		return nodes;
+	}
+	for(var i=0; i<parts.length; i++){
+		for(var j=0; j<g_regSelectors.length;j++){
+			if(g_regSelectors[j] != parts[i])
+				continue;
+			return g_regElementsList[j];
+		}
+		nodes = getSelectedNodes(parts[i], nodes);
+		g_regSelectors[g_regSelectors.length] = parts[i];
+		g_regElementsList[g_regElementsList.length] = nodes;
+	}
+	return nodes;
+}
+
+function getSelectedNodes(select, elements) {
+	var result, node, nodes = [];
+	var identify = (/\#([a-z0-9_-]+)/i).exec(select);
+	if(identify) {
+		var element = doc.getElementById(identify[1]);
+		return element ? [element] : nodes;
+	}
+
+	var classname = (/\.([a-z0-9_-]+)/i).exec(select);
+	var tagName = select.replace(/(\.|\#|\:)[a-z0-9_-]+/i, '');
+	var classReg = classname? new RegExp('\\b' + classname[1] + '\\b'):false;
+	var nElementsNum = elements.length;
+	for(var i=0; i<nElementsNum; i++) {
+		result = tagName? elements[i].all.tags(tagName):elements[i].all; 
+		for(var j=0; j<result.length; j++) {
+			node = result[j];
+			if(classReg && !classReg.test(node.className))
+				continue;
+			nodes[nodes.length] = node;
+		}
+	}
+	
+	return nodes;
+}
+</script>
+
+// --- IE5.5+ PNG Alpha ---
+<!-- attach event="onload" onevent="doPNGAlpha()" / -->
+<script type="text/javascript">
+if( typeof vBlankImage == 'undefined' )
+	var vBlankImage = 'cssblank.gif';
+
+var funcDXITMSAIL = 'DXImageTransform.Microsoft.AlphaImageLoader';
+
+function doFilter(vSrc, vMethod){
+	if( filters[funcDXITMSAIL] ){
+		filters[funcDXITMSAIL].enabled = vSrc ? true : false;
+		if( vSrc ){
+			with( filters[funcDXITMSAIL] ){
+				src = vSrc;
+				sizingMehod = vMethod;
+			}
+		}
+	}else if( vSrc ){
+		style.filter = 'progid:' + funcDXITMSAIL + '(src="'+ vSrc + '",sizingMethod="' + vMethod + '")';
+	}
+}
+
+// 透過PNG画像のクリップタグ作成
+function makePNGAlphaImageClipTag( vImg,nClipLeft,nClipTop,nClipRight,nClipBottom ){
+	var sRslt = '<div class="cssassistpngalphaclipimg"';
+	sRslt += ' style="';
+	sRslt += ' width: '          + vImg.width  + 'px;';
+	sRslt += ' height: '         + vImg.height + 'px;';
+	sRslt += ' margin-left: '   + (-nClipLeft) + 'px;';
+	sRslt += ' margin-top: '    + (-nClipTop)  + 'px;';
+	sRslt += ' margin-right: '  + (nClipRight  - vImg.width) + 'px;';
+	sRslt += ' margin-bottom: ' + (nClipBottom - vImg.height) + 'px;';
+	sRslt += ' background: none;';
+	sRslt += ' filter: progid:' + funcDXITMSAIL + '(src=\'' + vImg.src + '\',sizingMethod=\'crop\');';
+	sRslt += '"></div>';
+	return sRslt;
+}
+
+function makePNGAlphaImageTag( vImg,sBkColor,nOffsetX,nOffsetY,nWidth,nHeight ){
+	var sRslt = '<div class="cssassistpngalphaimg"';
+	sRslt += ' style="';
+	if( sBkColor )
+		sRslt += ' background-color:' + sBkColor + ';';
+	sRslt += ' width: ' + vImg.width + 'px;';
+	sRslt += ' height: ' + vImg.height + 'px;';
+	sRslt += ' filter: progid:' + funcDXITMSAIL + '(src=\'' + vImg.src + '\',sizingMethod=\'crop\');';
+	sRslt += '"></div>';
+	return sRslt;
+}
+
+function makePNGAlphaImageTableTag( vImg,sBkColor,nCol,nRow,nOffsetX,nOffsetY,nWidth,nHeight ){
+	var sRslt = '<table border=0 cellpadding=0 cellspacing=0'
+				+ ' class="cssassistpngalphatable"'
+				+ ' style="'
+				+ ' margin-left:' + nOffsetX + 'px;'
+				+ ' margin-top:'  + nOffsetY + 'px;';
+	sRslt += ' ">\n';
+	for( var y=0; y<nRow; y++ ){
+		sRslt += '<tr>\n';
+		for( var x=0; x<nCol; x++ )
+			sRslt += '<td>' + makePNGAlphaImageTag( vImg,sBkColor,0,0,nWidth,nHeight ) + '</td>\n';
+		sRslt += '</tr>\n';
+	}
+	sRslt += '</table>';
+	return sRslt;
+}
+
+function isPNGAlphaBackgroundTopLeftOnly(){
+	var sRepeatType = currentStyle.backgroundRepeat;
+	var sBkPositionX = currentStyle.backgroundPositionX;
+	var sBkPositionY = currentStyle.backgroundPositionY;
+	if( (sRepeatType == 'no-repeat') 
+			&& ((sBkPositionX == 'auto') || (sBkPositionX == 'left') || (sBkPositionX == '0%'))
+			&& ((sBkPositionY == 'auto') || (sBkPositionY == 'top') || (sBkPositionY == '0%'))
+			)
+		return true;
+	return false;
+}
+
+function isPNGAlphaBackgroundOK(){
+	if( className == 'cssassistpng' )
+		return false;
+	if( className == 'cssassistpngalpha' )
+		return false;
+	if( className == 'cssassistpngalphatable' )
+		return false;
+	if( className == 'cssassistpngalphaimg' )
+		return false;
+
+	var vBkImage = currentStyle.backgroundImage || style.backgroundImage;
+	if( !vBkImage || (vBkImage == 'none') )
+		return false;
+	if( !vBkImage.match(/^url[("']+(.*\.png)[)"']+$/i) )
+		return false;
+
+	var sRepeatType = currentStyle.backgroundRepeat;
+	if( sRepeatType != 'no-repeat' )
+		return false;
+
+	var bLeftTopOnly = isPNGAlphaBackgroundTopLeftOnly();
+
+	if( tagName == 'BODY' ){
+		if( bLeftTopOnly )
+			return true;
+		return false;
+	}
+
+	if( tagName == 'DIV' )
+		return true;
+
+	return bLeftTopOnly;
+}
+
+function doPNGAlphaResize(){
+	style.width = '100%';
+}
+
+function doPNGAlphaBackground(){
+	var sRepeatType = currentStyle.backgroundRepeat;
+	var sBkPositionX = currentStyle.backgroundPositionX;
+	var sBkPositionY = currentStyle.backgroundPositionY;
+	var sBkColor = currentStyle.backgroundColor;
+	var bLeftTopOnly = isPNGAlphaBackgroundTopLeftOnly();
+
+	if( bLeftTopOnly ){
+		if( (currentStyle.width == 'auto') && (currentStyle.height == 'auto') )
+			style.width = offsetWidth + 'px';
+		var vSrc = RegExp.$1;
+		style.backgroundImage = 'none';
+		doFilter( vSrc,'crop' );
+		for( var n=0; n<childNodes.length; n++ ){
+			if( childNodes[n].style )
+				childNodes[n].style.position = 'relative';
+		}
+		return;
+	}
+
+	if( (currentStyle.width == 'auto') && (currentStyle.height == 'auto') )
+		style.width = offsetWidth + 'px';
+
+	var img = new Image();
+	img.src = RegExp.$1;
+	
+	// 左右の描画開始位置算出
+	var nPosLeft = 0;
+	if( currentStyle.backgroundPositionX ){
+		if( currentStyle.backgroundPositionX == 'center' )
+			nPosLeft = (offsetWidth - img.width) / 2;
+		else if( currentStyle.backgroundPositionX == 'right' )
+			nPosLeft = offsetWidth - img.width;
+	}
+	var nPosTop = 0;
+	if( currentStyle.backgroundPositionY ){
+		if( currentStyle.backgroundPositionY == 'center' )
+			nPosTop = (offsetHeight - img.height) / 2;
+		else if( currentStyle.backgroundPositionY == 'bottom' )
+			nPosTop = offsetHeight - img.height;
+	}
+
+	var nOffsetX = 0;
+	var nOffsetY = 0;
+	var nBackLeft	= 0;
+	var nBackTop	= 0;
+	var nBackWidth = clientWidth;
+	var nBackHeight = clientHeight;
+	var nBackRight	= nBackLeft + nBackWidth;
+	var nBackBottom	= nBackTop + nBackHeight;
+	var sPaddingLeft = currentStyle.paddingLeft;
+	var sPaddingTop = currentStyle.paddingTop;
+	var sPaddingRight = currentStyle.paddingRight;
+	var sPaddingBottom = currentStyle.paddingBottom;
+	var sCurMarginLeft = currentStyle.marginLeft;
+	var sCurMarginRight = currentStyle.marginRight;
+
+	if( tagName == 'BODY' ){
+		style.width = '100%';
+	}else{
+		style.width = clientWidth + 'px';
+	}
+	style.paddingLeft = '0px';
+	style.paddingTop = '0px';
+	style.paddingRight = '0px';
+	style.paddingBottom = '0px';
+
+	var nMarginBottom = (nBackHeight < img.height) ? (nBackHeight - img.height) : 0;
+	var sDiv = '<div';
+
+	if( tagName == 'BODY' ){
+		sDiv += ' name="cssassistpngalphafreesize"';
+	}else
+		sDiv += ' class="cssassistpngalpha"';
+
+	sDiv += ' style="';
+	sDiv += ' width: 100%;';
+	sDiv += ' padding-top: 0px';
+	if( sBkColor )
+		sDiv += ' background-color: ' + sBkColor + ';';
+	sDiv += ' clip:rect(0px,100%,100%,0px);';
+	sDiv += ' overflow: hidden;';
+	sDiv += '">\n';
+
+	var sAdd = '';
+	if( sRepeatType == 'repeat' ){
+		while( offsetLeft < nPosLeft )nPosLeft -= img.width;
+		while( offsetTop  < nPosTop  )nPosTop  -= img.height;
+		var nOffsetX = (nPosLeft < 0) ? nPosLeft : 0;
+		var nOffsetY = (nPosTop  < 0) ? nPosTop : 0;
+		var nTableWidth  = (window.screen.width  > nBackWidth ) ? window.screen.width  : nBackWidth;
+		var nTableHeight = (window.screen.height > nBackHeight) ? window.screen.height : nBackHeight;
+		var nCol = ((nTableWidth  - nOffsetX) + (img.width  - 1)) / img.width;
+		var nRow = ((nTableHeight - nOffsetY) + (img.height - 1)) / img.height;
+		sAdd += makePNGAlphaImageTableTag( img,sBkColor,nCol,nRow,nOffsetX,nOffsetY,nBackWidth,nBackHeight );
+	}else if( sRepeatType == 'repeat-x' ){
+		while( nBackLeft < nPosLeft )nPosLeft -= img.width;
+		var nOffsetX = (nPosLeft < 0) ? nPosLeft : 0;
+		var nTableWidth = (window.screen.width  > nBackWidth ) ? window.screen.width : nBackWidth;
+		var nCol = ((nTableWidth  - nOffsetX) + (img.width  - 1)) / img.width;
+		sAdd += makePNGAlphaImageTableTag( img,sBkColor,nCol,1,nOffsetX,nPosTop,nBackWidth,nBackHeight );
+	}else if( sRepeatType == 'repeat-y' ){
+		while( nBackTop < nPosTop )nPosTop -= img.height;
+		var nOffsetY = (nPosTop < 0) ? nPosTop : 0;
+		var nTableHeight = (window.screen.height > nBackHeight) ? window.screen.height : nBackHeight;
+		var nRow = ((nTableHeight - nOffsetY) + (img.height - 1)) / img.height;
+		sAdd += makePNGAlphaImageTableTag( img,sBkColor,1,nRow,nPosLeft,nOffsetY,nBackWidth,nBackHeight );
+	}else{
+		sAdd += makePNGAlphaImageTableTag( img,sBkColor,1,1,nPosLeft,nPosTop,nBackWidth,nBackHeight );
+	}
+	sDiv += sAdd;
+	sDiv += '</div>\n';
+	// 背景を無しにする
+	style.backgroundImage = 'none';
+
+	var sDivPad = '<div'
+		+ ' class="cssassistpngalpha"'
+		+ ' style="'
+		+ ' padding-left:'   + sPaddingLeft   + ';'
+		+ ' padding-top:'    + sPaddingTop    + ';'
+		+ ' padding-right:'  + sPaddingRight  + ';'
+		+ ' padding-bottom:' + sPaddingBottom + ';'
+		+ ' margin-top:' + -(img.height + nPosTop) + 'px;'
+		+ ' margin-bottom: 0px;'
+		+ ' margin-left: 0px;'
+		+ ' margin-right: 0px;'
+		+ '">';
+	var strInnerHTML = sDiv + sDivPad + innerHTML + '</div>';
+	innerHTML = strInnerHTML;
+
+	// BODYの場合は、windowのサイズ変更で表示領域が変わるのでイベントを登録
+	if( tagName == 'BODY' ){
+		window.attachEvent( "onresize",doPNGAlphaResize );
+	}
+}
+
+function doPNGAlphaResize(){
+	if(!/MSIE (5\.5|6\.)/.test(navigator.userAgent))
+		return;
+return;
+	var sTagList = "";
+	for( i=0; i<document.all.length; i++ ){
+		sTagList += document.all(i).tagName;
+		sTagList += "|";
+	}
+	alert( sTagList );
+	alert( document.all.tags("div").length );
+	for( var i=0; i<document.all.tags("IMG").length; i++ ){
+		alert( document.all.tags("IMG")(i).innerHTML );
+	}
+}
+
+function getPNGAlphaOffsetObj( vTargetObj ){
+	var pos = new function(){this.x=0,this.y=0;}
+	var offsetObj = vTargetObj;
+	while( offsetObj ){
+		pos.x += offsetObj.offsetLeft;
+		pos.y += offsetObj.offsetTop;
+		offsetObj = offsetObj.offsetParent;
+		if( !offsetObj )
+			continue;
+		// 枠の左上幅を加算
+		var nBorderLeftWidth = (parseInt( offsetObj.currentStyle.borderLeftWidth ) || 0);
+		var nBorderTopWidth  = (parseInt( offsetObj.currentStyle.borderTopWidth ) || 0);
+		// テーブルの枠線の重ね合わせ指定の考慮
+		if( offsetObj.currentStyle.borderCollapse == 'collapse' ){
+			nBorderLeftWidth = 0;
+			nBorderTopWidth = 0;
+			if( offsetObj.tagName == 'TD' ){
+				parentObj = offsetObj.offsetParent;
+				while( parentObj ){
+					if( parentObj.tagName == 'TABLE' ){
+						if( offsetObj.offsetLeft != (parseInt( parentObj.currentStyle.borderLeftWidth) || 0) )
+							nBorderLeftWidth = 1;
+						if( offsetObj.offsetTop != (parseInt( parentObj.currentStyle.borderTopWidth) || 0) )
+							nBorderTopWidth = 1;
+						break;
+					}
+					parentObj = parentObj.offsetParent;
+				}
+			}
+		}
+		pos.x += nBorderLeftWidth;
+		pos.y += nBorderTopWidth;
+		// 絶対座標指定が来たらここまで。
+		if( offsetObj.currentStyle.position == 'absolute' )
+			break;
+	}
+	return pos;
+}
+
+// ウィンドウのリサイズ対応処理
+var moveOffsetObjs = new Array;
+
+function doPNGAlphaWindowResize(){
+	if( !moveOffsetObjs )
+		return;
+	for( i=0; i<moveOffsetObjs.length; i++ ){
+		if( !moveOffsetObjs[i] || (moveOffsetObjs[i].length < 2) )
+			return;
+		var pos = getPNGAlphaOffsetObj( moveOffsetObjs[i][0] );
+		moveOffsetObjs[i][1].style.left = pos.x + 'px';
+		moveOffsetObjs[i][1].style.top  = pos.y + 'px';
+	}
+}
+
+function doPNGAlpha(){
+	if(!/MSIE (5\.5|6\.)/.test(navigator.userAgent))
+		return;
+	if( event && !/(background|src)/.test(event.propertyName) )
+		return;
+	if(className == 'cssassistpngalphaimg')
+		return false;
+	if(currentStyle['hpzpngalpha'])
+		return;
+	style['hpzpngalpha'] = 'on';
+
+	window.attachEvent( 'onresize',doPNGAlphaWindowResize );
+
+	if( (tagName == 'IMG') || (tagName == 'INPUT') ){
+		if( (/\.png$/i).test(src) ){
+			var nBorderWidth = parseInt( currentStyle.borderWidth );
+			if( !nBorderWidth )nBorderWidth = 0;
+			if( (currentStyle.width == 'auto') && (currentStyle.height == 'auto') ){
+				style.width = offsetWidth - (nBorderWidth *2 ) + 'px';
+				style.height = scrollHeight + 'px';
+			}
+			if( 0 < nBorderWidth ){
+				var parentObj = parentNode ? parentNode : parentElement;
+				for( i=0; i<parentObj.all.length; i++){
+					if( parentObj.all(i).outerHTML != outerHTML )
+						continue;
+					var newObj = document.createElement( tagName );
+					newObj.setAttribute( 'alt',getAttribute( 'alt' ) );
+					newObj.setAttribute( 'width',getAttribute( 'width' ) );
+					newObj.setAttribute( 'height',getAttribute( 'height' ) );
+					newObj.src = src;
+					newObj.style.width	= currentStyle.width;
+					newObj.style.height	= currentStyle.height;
+					newObj.style.margin	= currentStyle.borderWidth;
+					newObj.style.filter = 'progid:' + funcDXITMSAIL + '(src="'+ src + '",sizingMethod="' + 'scale' + '")';
+					newObj.src	= vBlankImage;
+					newObj.style.position = 'absolute';
+					var pos = getPNGAlphaOffsetObj( this );
+					newObj.style.left	= pos.x + 'px';
+					newObj.style.top	= pos.y + 'px';
+					newObj.setAttribute( 'class','PNGAlphaAbsolute' );
+					parentObj.insertBefore( newObj,parentObj.all(i) );
+					moveOffsetObjs[moveOffsetObjs.length] = new Array(this,newObj);
+					src = vBlankImage;
+					break;
+				}
+			}else{
+				doFilter( src,'scale' );
+				src = vBlankImage;
+			}
+		}else if( src.indexOf( vBlankImage ) < 0 ){
+			doFilter();
+		}
+	}else if( isPNGAlphaBackgroundOK() ){
+		doPNGAlphaBackground();
+	}else{
+		doFilter();
+	}
+}
+
+doPNGAlpha();
+</script>
