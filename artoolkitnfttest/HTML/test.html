@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja">
+
+<!--2020/02/26 01:06:54-->
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <meta http-equiv="Content-Script-Type" content="text/javascript">
+  <meta name="GENERATOR" content="ホームページV4">
+  <title>NFT_test - </title>
+  <link rel="stylesheet" href="css/video-style.css" />
+</head>
+
+<body>
+  <div id="loading">
+  <img src="logo.png" alt="" border="0"> Loading, please wait</div>
+  <div id="app"></div>
+  <!--
+      ==================
+      CAMERA VIDEO & CANVAS
+      ==================
+      -->
+
+    <div id="app">
+      <video loop autoplay muted playsinline id="video"></video>
+
+      <canvas id="canvas"></canvas>
+    </div>
+    <a
+      href="https://raw.githubusercontent.com/artoolkit/artoolkit5/master/doc/Marker%20images/pinball.jpg"
+      class="ui marker"
+      target="_blank"
+    >
+      ? Marker Image
+    </a>
+  <script language="JavaScript" type="text/javascript" src="three.min.js"></script>  
+  <script language="JavaScript" type="text/javascript" src="GLTFLoader.js"></script>
+  <script language="JavaScript" type="text/javascript" src="threejs_worker_gltf.js"></script>
+  <script language="JavaScript" type="text/javascript">
+      /**
+       * APP / ELEMENTS
+       */
+      var container = document.getElementById("app");
+      var video = document.getElementById("video");
+      var canvas = document.getElementById("canvas");
+
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        var hint = {
+          audio: false,
+          video: true
+        };
+
+        if (window.innerWidth < 800) {
+          hint = {
+            audio: false,
+            video: {
+                width: { ideal: 480 },
+                height: { ideal: 640 },
+                facingMode:
+                    { exact:
+                        "environment"
+                    }
+                },
+          };
+        }
+
+        navigator.mediaDevices.getUserMedia(hint).then(function(stream) {
+          video.srcObject = stream;
+          video.addEventListener("loadedmetadata", function() {
+            video.play();
+
+            start(
+              container,
+              markers["pinball"],
+              video,
+              video.videoWidth,
+              video.videoHeight,
+              canvas,
+              
+              null
+            );
+          });
+        });
+      }
+    
+</script>
+</body>
+
+</html>

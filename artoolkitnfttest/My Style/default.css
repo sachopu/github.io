@@ -1,0 +1,193 @@
+* body,* img,* div,* p{
+ _behavior: url("cssassist.htc");
+}
+#footer{
+ clear: both;
+ width: auto;
+ display: block;
+ min-height: 23px;
+ text-align: right;
+}
+#header{
+ clear: both;
+ width: auto;
+ display: block;
+ min-height: 25px;
+ margin: 0px;
+ text-align: right;
+ font-style: normal;
+ font-weight: normal;
+}
+#main{
+ float: none;
+ width: auto;
+ min-height: 600px;
+ display: block;
+ padding: 8px 0px 0px 8px;
+}
+#menubar{
+ clear: both;
+ width: auto;
+ display: block;
+ min-height: 23px;
+ margin: 0px;
+}
+#menubar .button{
+ margin: 0px;
+ padding: 5px 15px 4px 6px;
+}
+#menubar a.tabs:hover{
+ color: #6b78a9;
+}
+#page{
+ width: 800px;
+ margin: 0px auto 0px 0px;
+ min-height: auto;
+ padding: 0px;
+ font-style: normal;
+ font-weight: normal;
+ min-width: 600px;
+}
+#side1{
+ float: left;
+ width: 205px;
+ display: none;
+ min-height: 600px;
+}
+#side1 .list{
+ text-align: left;
+ font: 1em/120% "MS UI Gothic";
+ margin: 3px 0px 3px 15px;
+ width: 185px;
+ height: 20px;
+}
+#side1 .list a{
+ background: #ffffff;
+}
+#side1 .list a:hover{
+ background: #efefef;
+ color: #0600b3;
+}
+#side2{
+ float: right;
+ width: 205px;
+ display: none;
+ min-height: 600px;
+}
+#title{
+ clear: both;
+ width: auto;
+ display: block;
+ min-height: 130px;
+ margin: 0px;
+ text-align: left;
+ font-size: 18pt;
+}
+.hide{
+ display: none;
+}
+.HPZAutoMarginAdjuster{
+ overflow-x: hidden;
+}
+.mainmenu .mainmenuitem,.horzmenu2 .mainmenuitem,.horzmenu3 .mainmenuitem,.horzmenu4 .mainmenuitem,.horzmenu5 .mainmenuitem,.horzmenu6 .mainmenuitem,.horzmenu7 .mainmenuitem,.horzmenu8 .mainmenuitem,.horzmenu9 .mainmenuitem{
+ float: left;
+ display: inline;
+}
+.mainmenu .mainmenuitemcenter,.horzmenu2 .mainmenuitemcenter,.horzmenu3 .mainmenuitemcenter,.horzmenu4 .mainmenuitemcenter,.horzmenu5 .mainmenuitemcenter,.horzmenu6 .mainmenuitemcenter,.horzmenu7 .mainmenuitemcenter,.horzmenu8 .mainmenuitemcenter,.horzmenu9 .mainmenuitemcenter{
+ float: left;
+ display: inline;
+}
+.mainmenu .mainmenuitemlink,.horzmenu2 .mainmenuitemlink,.horzmenu3 .mainmenuitemlink,.horzmenu4 .mainmenuitemlink,.horzmenu5 .mainmenuitemlink,.horzmenu6 .mainmenuitemlink,.horzmenu7 .mainmenuitemlink,.horzmenu8 .mainmenuitemlink,.horzmenu9 .mainmenuitemlink{
+ float: left;
+ text-decoration: none;
+ margin: 0px;
+ text-align: left;
+ padding: 0px 20px;
+ white-space: pre;
+}
+.mainmenu .mainmenuitemright,.horzmenu2 .mainmenuitemright,.horzmenu3 .mainmenuitemright,.horzmenu4 .mainmenuitemright,.horzmenu5 .mainmenuitemright,.horzmenu6 .mainmenuitemright,.horzmenu7 .mainmenuitemright,.horzmenu8 .mainmenuitemright,.horzmenu9 .mainmenuitemright{
+ float: left;
+ display: inline;
+}
+.mainmenu li,.horzmenu2 li,.horzmenu3 li,.horzmenu4 li,.horzmenu5 li,.horzmenu6 li,.horzmenu7 li,.horzmenu8 li,.horzmenu9 li{
+ float: left;
+ display: inline;
+ padding: 0px;
+}
+.mainmenu ul,.horzmenu2 ul,.horzmenu3 ul,.horzmenu4 ul,.horzmenu5 ul,.horzmenu6 ul,.horzmenu7 ul,.horzmenu8 ul,.horzmenu9 ul{
+ float: left;
+ list-style: none;
+ margin: 0px;
+ padding: 0px;
+}
+.mainmenu ul.pulldownmenu a,.horzmenu2 ul.pulldownmenu a,.horzmenu3 ul.pulldownmenu a,.horzmenu4 ul.pulldownmenu a,.horzmenu5 ul.pulldownmenu a,.horzmenu6 ul.pulldownmenu a,.horzmenu7 ul.pulldownmenu a,.horzmenu8 ul.pulldownmenu a,.horzmenu9 ul.pulldownmenu a{
+ text-decoration: none;
+}
+.mainmenu ul.pulldownmenu li,.horzmenu2 ul.pulldownmenu li,.horzmenu3 ul.pulldownmenu li,.horzmenu4 ul.pulldownmenu li,.horzmenu5 ul.pulldownmenu li,.horzmenu6 ul.pulldownmenu li,.horzmenu7 ul.pulldownmenu li,.horzmenu8 ul.pulldownmenu li,.horzmenu9 ul.pulldownmenu li{
+ margin: 0px;
+ padding: 5px;
+ clear: both;
+ white-space: pre;
+ border-top: none;
+ border-right: 1px;
+ border-bottom: 1px solid #ffffff;
+ border-left: 1px;
+}
+.mainmenu ul.pulldownmenu,.horzmenu2 ul.pulldownmenu,.horzmenu3 ul.pulldownmenu,.horzmenu4 ul.pulldownmenu,.horzmenu5 ul.pulldownmenu,.horzmenu6 ul.pulldownmenu,.horzmenu7 ul.pulldownmenu,.horzmenu8 ul.pulldownmenu,.horzmenu9 ul.pulldownmenu{
+ display: none;
+ list-style: none;
+ position: absolute;
+ margin: 0px;
+ padding: 0px;
+ text-decoration: none;
+ background-color: #ffffff;
+ border: 1px solid #dcdcdc;
+}
+.mainmenu,.horzmenu2,.horzmenu3,.horzmenu4,.horzmenu5,.horzmenu6,.horzmenu7,.horzmenu8,.horzmenu9{
+ margin: 0px;
+ padding: 0px;
+ overflow: auto;
+}
+.submenu .submenuitem .submenuitemcenter,.vertmenu2 .submenuitem .submenuitemcenter,.vertmenu3 .submenuitem .submenuitemcenter,.vertmenu4 .submenuitem .submenuitemcenter,.vertmenu5 .submenuitem .submenuitemcenter,.vertmenu6 .submenuitem .submenuitemcenter,.vertmenu7 .submenuitem .submenuitemcenter,.vertmenu8 .submenuitem .submenuitemcenter,.vertmenu9 .submenuitem .submenuitemcenter{
+ float: left;
+ display: inline;
+}
+.submenu .submenuitem .submenuitemright,.vertmenu2 .submenuitem .submenuitemright,.vertmenu3 .submenuitem .submenuitemright,.vertmenu4 .submenuitem .submenuitemright,.vertmenu5 .submenuitem .submenuitemright,.vertmenu6 .submenuitem .submenuitemright,.vertmenu7 .submenuitem .submenuitemright,.vertmenu8 .submenuitem .submenuitemright,.vertmenu9 .submenuitem .submenuitemright{
+ float: left;
+ display: inline;
+}
+.submenu .submenuitem,.vertmenu2 .submenuitem,.vertmenu3 .submenuitem,.vertmenu4 .submenuitem,.vertmenu5 .submenuitem,.vertmenu6 .submenuitem,.vertmenu7 .submenuitem,.vertmenu8 .submenuitem,.vertmenu9 .submenuitem{
+ float: left;
+}
+.submenu .submenuitem:hover .submenuitemcenter,.vertmenu2 .submenuitem:hover .submenuitemcenter,.vertmenu3 .submenuitem:hover .submenuitemcenter,.vertmenu4 .submenuitem:hover .submenuitemcenter,.vertmenu5 .submenuitem:hover .submenuitemcenter,.vertmenu6 .submenuitem:hover .submenuitemcenter,.vertmenu7 .submenuitem:hover .submenuitemcenter,.vertmenu8 .submenuitem:hover .submenuitemcenter,.vertmenu9 .submenuitem:hover .submenuitemcenter,.submenu .submenuitemcurrent .submenuitem .submenuitemcenter,.vertmenu2 .submenuitemcurrent .submenuitem .submenuitemcenter,.vertmenu3 .submenuitemcurrent .submenuitem .submenuitemcenter,.vertmenu4 .submenuitemcurrent .submenuitem .submenuitemcenter,.vertmenu5 .submenuitemcurrent .submenuitem .submenuitemcenter,.vertmenu6 .submenuitemcurrent .submenuitem .submenuitemcenter,.vertmenu7 .submenuitemcurrent .submenuitem .submenuitemcenter,.vertmenu8 .submenuitemcurrent .submenuitem .submenuitemcenter,.vertmenu9 .submenuitemcurrent .submenuitem .submenuitemcenter{
+ display: inline;
+}
+.submenu .submenuitem:hover .submenuitemright,.vertmenu2 .submenuitem:hover .submenuitemright,.vertmenu3 .submenuitem:hover .submenuitemright,.vertmenu4 .submenuitem:hover .submenuitemright,.vertmenu5 .submenuitem:hover .submenuitemright,.vertmenu6 .submenuitem:hover .submenuitemright,.vertmenu7 .submenuitem:hover .submenuitemright,.vertmenu8 .submenuitem:hover .submenuitemright,.vertmenu9 .submenuitem:hover .submenuitemright,.submenu .submenuitemcurrent .submenuitem .submenuitemright,.vertmenu2 .submenuitemcurrent .submenuitem .submenuitemright,.vertmenu3 .submenuitemcurrent .submenuitem .submenuitemright,.vertmenu4 .submenuitemcurrent .submenuitem .submenuitemright,.vertmenu5 .submenuitemcurrent .submenuitem .submenuitemright,.vertmenu6 .submenuitemcurrent .submenuitem .submenuitemright,.vertmenu7 .submenuitemcurrent .submenuitem .submenuitemright,.vertmenu8 .submenuitemcurrent .submenuitem .submenuitemright,.vertmenu9 .submenuitemcurrent .submenuitem .submenuitemright{
+ display: inline;
+}
+.submenu .submenuitemlink,.vertmenu2 .submenuitemlink,.vertmenu3 .submenuitemlink,.vertmenu4 .submenuitemlink,.vertmenu5 .submenuitemlink,.vertmenu6 .submenuitemlink,.vertmenu7 .submenuitemlink,.vertmenu8 .submenuitemlink,.vertmenu9 .submenuitemlink{
+ float: left;
+ text-decoration: none;
+ margin: 0px;
+ text-align: left;
+ padding: 0px 0px 5px;
+}
+.submenu li,.vertmenu2 li,.vertmenu3 li,.vertmenu4 li,.vertmenu5 li,.vertmenu6 li,.vertmenu7 li,.vertmenu8 li,.vertmenu9 li{
+ clear: both;
+ margin: 0px;
+}
+.submenu ul,.vertmenu2 ul,.vertmenu3 ul,.vertmenu4 ul,.vertmenu5 ul,.vertmenu6 ul,.vertmenu7 ul,.vertmenu8 ul,.vertmenu9 ul{
+ float: left;
+ list-style: none;
+ margin: 0px;
+ padding: 0px;
+}
+.submenu,.vertmenu2,.vertmenu3,.vertmenu4,.vertmenu5,.vertmenu6,.vertmenu7,.vertmenu8,.vertmenu9{
+ overflow: hidden;
+ margin: 0px;
+ padding: 0px;
+}
+body{
+ margin: 0px;
+ -webkit-text-size-adjust: none;
+}
