@@ -30,7 +30,7 @@
 #main{
  float: none;
  width: auto;
- min-height: 560px;
+ min-height: 470px;
  display: block;
  margin: 10px;
  padding: 10px;
@@ -39,6 +39,9 @@
  font-style: normal;
  font-weight: normal;
  color: #000000;
+}
+#main_wrapper000{
+ overflow-x: hidden;
 }
 #menubar{
  clear: both;
@@ -77,7 +80,7 @@
  float: left;
  width: 180px;
  display: none;
- min-height: 560px;
+ min-height: 470px;
  margin: 10px 0px;
  padding: 10px;
  background: #ffffff left top;
@@ -104,7 +107,7 @@
  float: right;
  width: 180px;
  display: none;
- min-height: 560px;
+ min-height: 470px;
  margin: 10px 0px;
  padding: 10px;
  background: #ffffff left top;
@@ -114,22 +117,22 @@
  color: #000000;
 }
 #title{
- clear: both;
- width: auto;
- display: none;
- min-height: 50px;
  margin: 0px;
  padding: 30px 16px 10px;
  background: #ffffff right top;
- text-align: left;
+ width: auto;
+ min-height: 50px;
+ display: block;
+ clear: both;
  font-style: normal;
  font-weight: normal;
  font-size: 18pt;
  color: #000000;
+ text-align: left;
 }
 .address1{
  padding: 0px 0px 0px 20px;
- background: url("a0_0010_mailbtn01.png") no-repeat left top;
+ background: #c0c0c0 url("a0_0010_mailbtn01.png") no-repeat left top;
  font-style: normal;
  font-weight: bold;
  font-size: 11pt;
@@ -195,6 +198,12 @@
  color: #000000;
 }
 .horzmenu2 .mainmenuitemcurrent .mainmenuitemlink:visited{
+ color: #000000;
+}
+.horzmenu2,.horzmenu3,.horzmenu4,.horzmenu5,.horzmenu6,.horzmenu7,.horzmenu8,.horzmenu9{
+ margin: 0px;
+ padding: 0px;
+ overflow: auto;
  color: #000000;
 }
 .horzmenu3 .mainmenuitemcurrent .mainmenuitemlink{
@@ -333,6 +342,12 @@
  text-decoration: none;
  text-transform: none;
 }
+.mainmenu{
+ margin: 0px;
+ padding: 0px;
+ overflow: auto;
+ color: #000000;
+}
 .mainmenu .mainmenuitem,.horzmenu2 .mainmenuitem,.horzmenu3 .mainmenuitem,.horzmenu4 .mainmenuitem,.horzmenu5 .mainmenuitem,.horzmenu6 .mainmenuitem,.horzmenu7 .mainmenuitem,.horzmenu8 .mainmenuitem,.horzmenu9 .mainmenuitem{
  float: left;
  display: inline;
@@ -420,11 +435,10 @@
  background-color: #ffffff;
  border: 1px solid #dcdcdc;
 }
-.mainmenu,.horzmenu2,.horzmenu3,.horzmenu4,.horzmenu5,.horzmenu6,.horzmenu7,.horzmenu8,.horzmenu9{
+.submenu{
+ overflow: hidden;
  margin: 0px;
  padding: 0px;
- overflow: auto;
- color: #000000;
 }
 .submenu .submenuitem .submenuitemcenter,.vertmenu2 .submenuitem .submenuitemcenter,.vertmenu3 .submenuitem .submenuitemcenter,.vertmenu4 .submenuitem .submenuitemcenter,.vertmenu5 .submenuitem .submenuitemcenter,.vertmenu6 .submenuitem .submenuitemcenter,.vertmenu7 .submenuitem .submenuitemcenter,.vertmenu8 .submenuitem .submenuitemcenter,.vertmenu9 .submenuitem .submenuitemcenter{
  float: left;
@@ -471,18 +485,13 @@
 .submenu .submenuitemlink:hover,.vertmenu2 .submenuitemlink:hover,.vertmenu3 .submenuitemlink:hover,.vertmenu4 .submenuitemlink:hover,.vertmenu5 .submenuitemlink:hover,.vertmenu6 .submenuitemlink:hover,.vertmenu7 .submenuitemlink:hover,.vertmenu8 .submenuitemlink:hover,.vertmenu9 .submenuitemlink:hover{
  color: #000000;
 }
-.submenu li,.vertmenu2 li,.vertmenu3 li,.vertmenu4 li,.vertmenu5 li,.vertmenu6 li,.vertmenu7 li,.vertmenu8 li,.vertmenu9 li{
+.submenu li{
  clear: both;
  margin: 0px;
 }
 .submenu ul,.vertmenu2 ul,.vertmenu3 ul,.vertmenu4 ul,.vertmenu5 ul,.vertmenu6 ul,.vertmenu7 ul,.vertmenu8 ul,.vertmenu9 ul{
  float: left;
  list-style: none;
- margin: 0px;
- padding: 0px;
-}
-.submenu,.vertmenu2,.vertmenu3,.vertmenu4,.vertmenu5,.vertmenu6,.vertmenu7,.vertmenu8,.vertmenu9{
- overflow: hidden;
  margin: 0px;
  padding: 0px;
 }
@@ -494,6 +503,15 @@
 }
 .vertmenu2 .submenuitemcurrent .submenuitem .submenuitemlink:visited{
  color: #000000;
+}
+.vertmenu2 li,.vertmenu3 li,.vertmenu4 li,.vertmenu5 li,.vertmenu6 li,.vertmenu7 li,.vertmenu8 li,.vertmenu9 li{
+ clear: both;
+ margin: 0px;
+}
+.vertmenu2,.vertmenu3,.vertmenu4,.vertmenu5,.vertmenu6,.vertmenu7,.vertmenu8,.vertmenu9{
+ overflow: hidden;
+ margin: 0px;
+ padding: 0px;
 }
 .vertmenu3 .submenuitemcurrent .submenuitem .submenuitemlink{
  color: #000000;

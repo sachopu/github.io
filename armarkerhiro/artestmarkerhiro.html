@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja">
+
+<!--2020/02/09 13:33:49-->
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <meta http-equiv="Content-Script-Type" content="text/javascript">
+  <meta name="GENERATOR" content="">
+  <title>WebAR</title>
+  <meta charset="utf-8">  <link rel="stylesheet" href="02_white_a0_0010.css" type="text/css" media="all">
+</head>
+<body style="overflow: hidden;">
+  <script language="JavaScript" type="text/javascript" src="aframe.min.js"></script>
+  <script language="JavaScript" type="text/javascript" src="aframe-ar.js"></script>
+  <script language="JavaScript" type="text/javascript" src="aframe-extras.min.js"></script>
+  <a-scene embedded arjs="debugUIEnabled:false; sourceType: webcam;" vr-mode-ui="enabled: false" renderer="gammaOutput: true;">
+	<a-assets>
+		<a-asset-item id="ebi" src="ebi.glb"></a-assets-item>
+	</a-assets>         
+  <a-marker preset="hiro">
+ 	<a-entity gltf-model="#ebi" scale="1 1 1" animation-mixer></a-entity> 
+	<a-light type="ambient" color="#FFF">  
+</a-marker>
+ <a-entity camera></a-entity>
+   </a-scene>
+</body>
+
+</html>
