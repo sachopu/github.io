@@ -72,7 +72,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     renderer.gammaFactor = 2.2;
     //renderer.shadowMap.enabled = true;
     //renderer.setClearColor(0x000000, 0);
-    renderer.sortObjects = false;
+    //renderer.sortObjects = false;
     //renderer.gammaInput =true;
     //renderer.autoClear = false;
     var scene = new THREE.Scene();
@@ -85,7 +85,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
 
     scene.add(camera);
 
-    var light = new THREE.AmbientLight(0xdddddd);
+    var light = new THREE.AmbientLight(0xffffff);
    scene.add(light);
     		
     /*
@@ -109,13 +109,13 @@ function start( container, marker, video, input_width, input_height, canvas_draw
 
 
             // glTF(DRACO圧縮された)モデルを読み込む
-            threeGLTFLoader.setDRACOLoader(new THREE.DRACOLoader('./', { type: 'js' }));
+            //threeGLTFLoader.setDRACOLoader(new THREE.DRACOLoader('./', { type: 'js' }));
             // モデルのパス
             url = "./models/test2.glb";
 
     threeGLTFLoader.load(url, function (gltf) {
             model = gltf.scene;//.children[2];
-            gltf.flatShading;
+            // gltf.flatShading;
             model.castShadow = true;
             model.receiveShadow = true;
             //gltf.frustumCulled = false;
@@ -138,7 +138,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
             root.matrixAutoUpdate = false;
             root.add(model);
             
-            THREE.DRACOLoader.releaseDecoderModule();
+            //THREE.DRACOLoader.releaseDecoderModule();
         }
     );
 
