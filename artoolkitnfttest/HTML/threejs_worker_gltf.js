@@ -118,7 +118,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
             gltf.flatShading;
             model.castShadow = true;
             model.receiveShadow = true;
-            gltf.frustumCulled = false;
+            //gltf.frustumCulled = false;
         
 
             model.rotation.x = 0*Math.PI;
