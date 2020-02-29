@@ -67,11 +67,11 @@ function start( container, marker, video, input_width, input_height, canvas_draw
         
     });
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.outputEncoding = THREE.sRGBEncoding;
+    //renderer.outputEncoding = THREE.sRGBEncoding;
     renderer.gammaOutput = true;
     renderer.gammaFactor = 2.2;
-    renderer.shadowMap.enabled = true;
-    renderer.setClearColor(0x000000, 0);
+    //renderer.shadowMap.enabled = true;
+    //renderer.setClearColor(0x000000, 0);
     renderer.sortObjects = false;
     //renderer.gammaInput =true;
     //renderer.autoClear = false;
@@ -85,7 +85,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
 
     scene.add(camera);
 
-    var light = new THREE.AmbientLight(0xaaaaaa);
+    var light = new THREE.AmbientLight(0xdddddd);
    scene.add(light);
     		
     /*
