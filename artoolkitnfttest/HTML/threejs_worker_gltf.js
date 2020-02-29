@@ -6,7 +6,7 @@ function isMobile() {
     return /Android|mobile|iPad|iPhone/i.test(navigator.userAgent);
 }
 
-var interpolationFactor = 5;
+var interpolationFactor = 7;
 
 var trackedMatrix = {
     // for interpolation
@@ -26,10 +26,10 @@ var trackedMatrix = {
 
 var markers = {
     pinball: {
-        width: 1637,
-        height: 2048,
-        dpi: 215,
-        url: "../DataNFT/pinball"
+        width: 800,
+        height: 600,
+        dpi: 72,
+        url: "../DataNFT/mark2"
     }
 };
 
@@ -62,24 +62,37 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     var renderer = new THREE.WebGLRenderer({
         canvas: canvas_draw,
         alpha: true,
-        antialias: true
+        antialias: true,
+        precision: 'mediump'
+        
     });
     renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.outputEncoding = THREE.sRGBEncoding;
     renderer.gammaOutput = true;
+    renderer.gammaFactor = 2.2;
+    renderer.shadowMap.enabled = true;
+    renderer.setClearColor(0x000000, 0);
+    renderer.sortObjects = false;
     //renderer.gammaInput =true;
-    
+    //renderer.autoClear = false;
     var scene = new THREE.Scene();
 
     var camera = new THREE.Camera();
     camera.matrixAutoUpdate = false;
     // var camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
-    // camera.position.z = 400;
+    
+    //camera.position.z = 0;
 
     scene.add(camera);
 
-    var light = new THREE.AmbientLight(0xffffff);
-    scene.add(light);
-    
+    var light = new THREE.AmbientLight(0xaaaaaa);
+   scene.add(light);
+    		
+    /*
+    var directionalLight = new THREE.DirectionalLight( 0x222222, 4 );
+					directionalLight.position.set( 0, 0, 2 ).normalize();
+					scene.add( directionalLight );
+                    */
     
 
    /* var sphere = new THREE.Mesh(
@@ -94,15 +107,28 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     /* Load Model */
     var threeGLTFLoader = new THREE.GLTFLoader();
 
-    threeGLTFLoader.load("./models/kuma.glb", function (gltf) {
-            model = gltf.scene;
-            model.rotation.x = 0.5*Math.PI;
+
+            // glTF(DRACO圧縮された)モデルを読み込む
+            threeGLTFLoader.setDRACOLoader(new THREE.DRACOLoader('./', { type: 'js' }));
+            // モデルのパス
+            url = "./models/test2.glb";
+
+    threeGLTFLoader.load(url, function (gltf) {
+            model = gltf.scene;//.children[2];
+            gltf.flatShading;
+            model.castShadow = true;
+            model.receiveShadow = true;
+            gltf.frustumCulled = false;
+        
+
+            model.rotation.x = 0*Math.PI;
             model.rotation.y = 1*Math.PI;
-            model.position.z = 0;
+            model.position.z = 20;
             model.position.x = 100;
             model.position.y = 100;
-            model.scale.set(70,70,70);
-
+            model.scale.set(80,80,80);
+            
+     
             var animation = gltf.animations[0];
             var mixer = new THREE.AnimationMixer(model);
             mixers.push(mixer);
@@ -111,6 +137,8 @@ function start( container, marker, video, input_width, input_height, canvas_draw
 
             root.matrixAutoUpdate = false;
             root.add(model);
+            
+            THREE.DRACOLoader.releaseDecoderModule();
         }
     );
 
