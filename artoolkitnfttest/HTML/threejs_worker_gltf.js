@@ -63,7 +63,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
         canvas: canvas_draw,
         alpha: true,
         antialias: true,
-        precision: 'mediump'
+        //precision: 'mediump'
         
     });
     renderer.setPixelRatio(window.devicePixelRatio);
@@ -116,8 +116,8 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     threeGLTFLoader.load(url, function (gltf) {
             model = gltf.scene;//.children[2];
             // gltf.flatShading;
-            model.castShadow = true;
-            model.receiveShadow = true;
+            //model.castShadow = true;
+            //model.receiveShadow = true;
             //gltf.frustumCulled = false;
         
 
