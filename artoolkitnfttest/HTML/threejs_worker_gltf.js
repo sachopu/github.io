@@ -6,7 +6,7 @@ function isMobile() {
     return /Android|mobile|iPad|iPhone/i.test(navigator.userAgent);
 }
 
-var interpolationFactor = 1;
+var interpolationFactor = 3;
 
 var trackedMatrix = {
     // for interpolation
@@ -67,13 +67,13 @@ function start( container, marker, video, input_width, input_height, canvas_draw
         
     });
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.outputEncoding = THREE.sRGBEncoding;
+    //renderer.outputEncoding = THREE.sRGBEncoding;
     renderer.gammaOutput = true;
     //renderer.gammaFactor = 2.2;
     //renderer.shadowMap.enabled = true;
     //renderer.setClearColor(0x000000, 0);
     //renderer.sortObjects = false;
-    //renderer.gammaInput =true;
+    renderer.gammaInput =true;
     //renderer.autoClear = false;
     var scene = new THREE.Scene();
 
@@ -84,10 +84,8 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     //camera.position.z = 0;
 
     scene.add(camera);
-
     var light = new THREE.AmbientLight(0xffffff);
    scene.add( light );
-    		
     /*
     var directionalLight = new THREE.DirectionalLight( 0x222222, 4 );
 					directionalLight.position.set( 0, 0, 2 ).normalize();
