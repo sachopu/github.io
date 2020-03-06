@@ -92,7 +92,7 @@ window.ARThreeOnLoad = function() {
 
 		//GLTFLoaderで3ｄファイル読み込み
 		var loader = new THREE.GLTFLoader();
-		loader.load('test2.glb',function(data){
+		loader.load('../artoolkitnfttest/HTML/models/test2.glb',function(data){
 			var gltf = data;
 			var obj = gltf.scene;
 			var animations = gltf.animations;
