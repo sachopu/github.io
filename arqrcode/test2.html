@@ -49,7 +49,8 @@ window.ARThreeOnLoad = function() {
 		//レンダラーにprecision:'mediump'入れるとモデルの暗黒化対策になるっぽい
 		var renderer = new THREE.WebGLRenderer({antialias: true, precision: /*'lowp'*/'mediump'});
 		//gammaOutputでもでるを明るくすることができるっぽい
-		//renderer.gammaInput =true;
+        renderer.setPixelRatio(window.devicePixelRatio);
+        //renderer.gammaInput =true;
 		renderer.gammaOutput = true;
 		//renderer.gammaFactor = 2.2;
 
