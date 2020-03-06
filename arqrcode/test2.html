@@ -102,7 +102,7 @@ window.ARThreeOnLoad = function() {
 			obj.position.y = 0.25;
 			obj.rotation.x = 0.5*Math.PI;
 			obj.rotation.y = 1*Math.PI;
-			obj.scale.set(20,20,20)
+			obj.scale.set(1,1,1)
 			//ペアレントに含まれるメッシュを探してんじゃね？
 			for(var i = 0; i < obj.children.length; i++){
 				var mesh = obj.children[i];
@@ -145,20 +145,20 @@ window.ARThreeOnLoad = function() {
 		The marker Object3D tracks the NFT marker when it's detected in the video.
 
 		Use this after a successful artoolkit.loadNFTMarker call:*/
-
+        /*
 		arController.loadNFTMarker('DataNFT/mark2', function(markerId) {
 			var markerRoot = arController.createThreeNFTMarker(markerId);
 			markerRoot.add( root3d );
 			arScene.scene.add(markerRoot);
 		});
-        
-		/*//arcontrollerでマーカーをつくり、3ｄまとめたrootをarcontrollerにわたしてるんじゃないかと
-		arController.loadMarker('Data/patt.hiro', function(markerUID) {
+        */
+		//arcontrollerでマーカーをつくり、3ｄまとめたrootをarcontrollerにわたしてるんじゃないかと
+		arController.loadMarker('QR.patt', function(markerUID) {
 			var markerRoot = arController.createThreeMarker(markerUID);
 			markerRoot.add(root3d);
 			arScene.scene.add(markerRoot);
         });
-        */
+        
 
 		/*//もともとのサンプル、arControllerにトーラスをわたしいるようです。
 		arController.loadMarker('Data/patt.kanji', function(markerId) {
