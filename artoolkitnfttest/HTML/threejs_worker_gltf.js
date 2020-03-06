@@ -109,15 +109,15 @@ function start( container, marker, video, input_width, input_height, canvas_draw
             // glTF(DRACO圧縮された)モデルを読み込む
             //threeGLTFLoader.setDRACOLoader(new THREE.DRACOLoader('./', { type: 'js' }));
             // モデルのパス
-            //var url = "./models/test2.glb";
+           
 
-    threeGLTFLoader.load("./models/test2.glb", function (gltf) {
+            threeGLTFLoader.load("./models/test2.glb", function (gltf) {
             model = gltf.scene;//.children[2];
             // gltf.flatShading;
             //model.castShadow = true;
             //model.receiveShadow = true;
             //gltf.frustumCulled = false;
-        
+            //THREE.DRACOLoader.releaseDecoderModule();
 
             model.rotation.x = 0*Math.PI;
             model.rotation.y = 1*Math.PI;
@@ -136,7 +136,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
             root.matrixAutoUpdate = false;
             root.add(model);
             
-            //THREE.DRACOLoader.releaseDecoderModule();
+            
         }
     );
 
