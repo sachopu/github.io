@@ -1,0 +1,201 @@
+<html>
+<head>
+<title>Pattern marker example with Three.js</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<style>
+html,body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	text-align: center;
+	overflow-x: hidden;
+}
+.portrait canvas {
+	transform-origin: 0 0;
+	transform: rotate(-90deg) translateX(-100%);
+}
+.desktop canvas {
+ 	transform: scale(1, 1);
+}
+</style>
+</head>
+<body>
+
+<h1>Pattern marker example with Three.js</h1>
+<p>On Chrome on Android, tap the screen to start playing video stream.</p>
+<p>Show  <a href="https://github.com/artoolkit/artoolkit5/blob/master/doc/patterns/Hiro%20pattern.pdf">Hiro pattern</a> and <a href="https://github.com/artoolkit/artoolkit5/blob/master/doc/patterns/Kanji%20pattern.pdf">Kanji pattern</a> to camera to display a colorful objects on top of them. Tap the screen to rotate the objects.
+
+<p>&larr; <a href="index.html">Back to examples</a></p>
+
+<!--<script async src="../build/artoolkitNft.min.js"></script>-->
+<script async src="./build/artoolkit.min.js"></script>
+<script src="./js/third_party/three.js/three.min.js"></script>
+<script src="./js/third_party/three.js/GLTFLoader.js"></script>
+<script async src="./js/artoolkit.three.js"></script>
+
+
+<script>
+
+window.ARThreeOnLoad = function() {
+
+	ARController.getUserMediaThreeScene({maxARVideoSize: 320, cameraParam: 'Data/camera_para-iPhone 5 rear 640x480 1.0m.dat',
+	onSuccess: function(arScene, arController, arCamera) {
+		//mixer変数を予め準備（tickからmixer呼び出す為）
+		var mixer;
+		//clock作成（デルタタイム使う為）
+		var clock = new THREE.Clock();
+
+		document.body.className = arController.orientation;
+
+		//レンダラーにprecision:'mediump'入れるとモデルの暗黒化対策になるっぽい
+		var renderer = new THREE.WebGLRenderer({antialias: true, precision: /*'lowp'*/'mediump'});
+		//gammaOutputでもでるを明るくすることができるっぽい
+		//renderer.gammaInput =true;
+		renderer.gammaOutput = true;
+		//renderer.gammaFactor = 2.2;
+
+		if (arController.orientation === 'portrait') {
+			var w = (window.innerWidth / arController.videoHeight) * arController.videoWidth;
+			var h = window.innerWidth;
+			renderer.setSize(w, h);
+			renderer.domElement.style.paddingBottom = (w-h) + 'px';
+		} else {
+			if (/Android|mobile|iPad|iPhone/i.test(navigator.userAgent)) {
+				renderer.setSize(window.innerWidth, (window.innerWidth / arController.videoWidth) * arController.videoHeight);
+			} else {
+				renderer.setSize(arController.videoWidth, arController.videoHeight);
+				document.body.className += ' desktop';
+			}
+		}
+
+		document.body.insertBefore(renderer.domElement, document.body.firstChild);
+
+		var rotationV = 0;
+		var rotationTarget = 0;
+
+		renderer.domElement.addEventListener('click', function(ev) {
+			ev.preventDefault();
+			rotationTarget += 1;
+		}, false);
+		/*とりあえずスフィアをｇｌｂと入れ替えるのでコメントアウト
+		var sphere = new THREE.Mesh(
+			new THREE.SphereGeometry(0.5, 8, 8),
+			new THREE.MeshNormalMaterial()
+		);
+		sphere.material.flatShading;
+		sphere.position.z = 0.5;
+		*/
+		
+		var root3d = new THREE.Object3D();　//glbとアニメーションをまとめる多分（呼び出しはまだ、markercontllerのセカンドプロパティにわたす多分）
+        var light = new THREE.AmbientLight(0xffffff);　//ライトの準備（よびだしはまだ）
+
+        arScene.scene.add( light );
+
+		//GLTFLoaderで3ｄファイル読み込み
+		var loader = new THREE.GLTFLoader();
+		loader.load('test2.glb',function(data){
+			var gltf = data;
+			var obj = gltf.scene;
+			var animations = gltf.animations;
+			//モデルの位置設定
+			obj.position.z = 0;
+            obj.position.x = 0;
+			obj.position.y = 0.25;
+			obj.rotation.x = 0.5*Math.PI;
+			obj.rotation.y = 1*Math.PI;
+			obj.scale.set(20,20,20)
+			//ペアレントに含まれるメッシュを探してんじゃね？
+			for(var i = 0; i < obj.children.length; i++){
+				var mesh = obj.children[i];
+				//メッシュにキャストシャドウ設定してるんじゃね？
+				for(var j = 0; j < mesh.children.laength; j++){
+					if(j == 0){
+					var meshchild = mesh.children[j];
+					meshchild.castShadow = true;
+				}
+
+			} 
+		};
+		
+		//アニメーションさす。ミキサーnewしてlengthで全部引き出してクリップアクションをプレイ？を準備
+		//実際のアニメーションはtickで呼び出しているぽ。もっとbelowにある
+		if(animations && animations.length){
+			mixer = new THREE.AnimationMixer(obj);
+
+			for(var i = 0; i < animations.length; i++ ){
+				var animation = animations[i];
+				var action = mixer.clipAction(animation) ;
+				action.play();
+			}
+		}
+		//root3d.matrixAutoUpdate = false;
+		root3d.add(obj);　//たぶん3ｄまとめるrootにわたしてる	
+	});
+
+		//トーラス作ってるようですがもともとのサンプルなので知らない。漢字マーカーで呼び出すみたい
+		var torus = new THREE.Mesh(
+			new THREE.TorusGeometry(0.3, 0.2, 8, 8),
+			new THREE.MeshNormalMaterial()
+		);
+		torus.material.flatShading;
+		torus.position.z = 0.5;
+		torus.rotation.x = Math.PI/2;
+
+        /**
+		Creates a Three.js marker Object3D for the given NFT marker UID.
+		The marker Object3D tracks the NFT marker when it's detected in the video.
+
+		Use this after a successful artoolkit.loadNFTMarker call:*/
+		/*NTFだとメッシュがバグるんだが
+		arController.loadNFTMarker('DataNFT/mark2', function(markerId) {
+			var markerRoot = arController.createThreeNFTMarker(markerId);
+			markerRoot.add( root3d );
+			arScene.scene.add(markerRoot);
+		});
+        */
+		//arcontrollerでマーカーをつくり、3ｄまとめたrootをarcontrollerにわたしてるんじゃないかと
+		arController.loadMarker('Data/patt.hiro', function(markerUID) {
+			var markerRoot = arController.createThreeMarker(markerUID);
+			markerRoot.add(root3d);
+			arScene.scene.add(markerRoot);
+        });
+
+		/*//もともとのサンプル、arControllerにトーラスをわたしいるようです。
+		arController.loadMarker('Data/patt.kanji', function(markerId) {
+			var markerRoot = arController.createThreeMarker(markerId);
+			markerRoot.add(torus);
+			arScene.scene.add(markerRoot);
+		});*/
+
+		var tick = function() {
+			arScene.process();
+
+			//rotationV += (rotationTarget - sphere.rotation.z) * 0.05;
+			//sphere.rotation.z += rotationV;
+			//torus.rotation.y += rotationV;
+			//rotationV *= 0.8;
+
+			arScene.renderOn(renderer);
+			requestAnimationFrame(tick);
+			//ここでmixerをupdateしてるclockはここで必要だったんですね
+			if(mixer){
+            mixer.update(clock.getDelta());
+        }
+
+		};
+
+		tick();
+
+	}});
+
+	delete window.ARThreeOnLoad;
+
+};
+
+if (window.ARController && ARController.getUserMediaThreeScene) {
+	ARThreeOnLoad();
+}
+</script>
+
+</body>
+</html>

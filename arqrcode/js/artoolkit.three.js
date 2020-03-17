@@ -355,14 +355,13 @@
 	};
 	/**
 	 * Helper Method for Three.js compatibility
-	 */
-	var setProjectionMatrix = function(projectionMatrix, value) {
+	 *//*	var setProjectionMatrix = function(projectionMatrix, value) {
 		if (typeof projectionMatrix.elements.set === "function") {
 			projectionMatrix.elements.set(value);
 		} else {
 			projectionMatrix.elements = [].slice.call(value);
 		}
-	};
+	};*/
 
 	var tick = function() {
 		if (window.ARController && window.THREE) {
