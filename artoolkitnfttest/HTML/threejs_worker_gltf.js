@@ -120,7 +120,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
      
 
             threeGLTFLoader.load("./models/test2.glb", function (gltf) {
-            model = gltf.scene.children[2];
+            model = gltf.scene;//children[2];
             //model.name = "test2";
             // gltf.flatShading;
             //model.castShadow = true;
@@ -130,10 +130,10 @@ function start( container, marker, video, input_width, input_height, canvas_draw
 
             model.rotation.x = 0*Math.PI;
             model.rotation.y = 1*Math.PI;
-            model.position.z = 0;
+            model.position.z = 5;
             model.position.x = 100;
             model.position.y = 100;
-            model.scale.set(30,30,30);
+            model.scale.set(40,40,40);
             
      
             var animation = gltf.animations[0];
