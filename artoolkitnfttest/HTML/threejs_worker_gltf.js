@@ -64,11 +64,11 @@ function start( container, marker, video, input_width, input_height, canvas_draw
         canvas: canvas_draw,
         alpha: true,
         antialias: true,
-        precision: 'mediump'//'lowp'
+        precision: 'lowp'//'mediump'
         
     });
     renderer.setPixelRatio(window.devicePixelRatio);
-    //renderer.outputEncoding = THREE.sRGBEncoding;
+    renderer.outputEncoding = THREE.sRGBEncoding;
     renderer.gammaOutput = true;
     //renderer.gammaFactor = 2.2;
     //renderer.shadowMap.enabled = true;
