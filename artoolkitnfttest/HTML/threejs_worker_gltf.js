@@ -81,10 +81,12 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     camera = new THREE.Camera();
    
     //var camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 1000);
-    camera.matrixAutoUpdate = false;
+    
    // camera.position.z = 0;
 
     scene.add(camera);
+    camera.matrixAutoUpdate = false;
+
     var light = new THREE.AmbientLight(0xffffff);
    scene.add( light );
     
@@ -107,7 +109,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     
     
     var root = new THREE.Group();
-    scene.add(root);
+    
   
 
 
@@ -149,8 +151,10 @@ function start( container, marker, video, input_width, input_height, canvas_draw
             //    height: dimensions.max.y - dimensions.min.y
             //};
             root.add(model); 
+            scene.add(root);
             
         }
+        
     );
     var load = function() {
         vw = input_width;
