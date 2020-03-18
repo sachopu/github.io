@@ -30,7 +30,7 @@ var markers = {
         width: 1250,
         height: 1667,
         dpi: 150,
-        url: "../DataNFT/mark"
+        url: "../DataNFT/mark2"
     }
 };
 
