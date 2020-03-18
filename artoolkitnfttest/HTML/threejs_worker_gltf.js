@@ -90,9 +90,9 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     var light = new THREE.AmbientLight(0xffffff);
    scene.add( light );
     
-    var directionalLight = new THREE.DirectionalLight( 0x222222, 4 );
+    /*var directionalLight = new THREE.DirectionalLight( 0x222222, 4 );
 					directionalLight.position.set( 0, 0, 2 ).normalize();
-					scene.add( directionalLight );
+					scene.add( directionalLight );*/
                     
     
     var root = new THREE.Object3D();
@@ -131,9 +131,9 @@ function start( container, marker, video, input_width, input_height, canvas_draw
             model.rotation.x = 0*Math.PI;
             model.rotation.y = 1*Math.PI;
             model.position.z = 0;
-            model.position.x = 200;
-            model.position.y = 200;
-            model.scale.set(40,40,40);
+            model.position.x = 100;
+            model.position.y = 100;
+            model.scale.set(30,30,30);
             
      
             var animation = gltf.animations[0];
