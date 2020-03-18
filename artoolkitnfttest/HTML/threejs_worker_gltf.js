@@ -27,10 +27,10 @@ var trackedMatrix = {
 
 var markers = {
     pinball: {
-        width: 80,
-        height: 60,
-        dpi: 72,
-        url: "../DataNFT/mark2"
+        width: 1250,
+        height: 1667,
+        dpi: 150,
+        url: "../DataNFT/mark"
     }
 };
 
@@ -78,11 +78,11 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     //renderer.autoClear = false;
     var scene = new THREE.Scene();
 
-    //camera = new THREE.Camera();
+    camera = new THREE.Camera();
    
-    var camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0, 1000);
+    //var camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 1000);
     camera.matrixAutoUpdate = false;
-    //camera.position.z = 0;
+   // camera.position.z = 0;
 
     scene.add(camera);
     var light = new THREE.AmbientLight(0xffffff);
@@ -94,23 +94,22 @@ function start( container, marker, video, input_width, input_height, canvas_draw
                     
     
     var root = new THREE.Object3D();
-    root.scale.set(100,100,100)
    
 
-   var sphere = new THREE.Mesh(
+  /* var sphere = new THREE.Mesh(
         new THREE.SphereGeometry(0.5, 8, 8),
         new THREE.MeshPhongMaterial({
             transparent: true,
             opacity: 0.0,
            })
     );
-    sphere.scale.set(1000,1000,1000);
+    sphere.scale.set(1000,1000,1000);*/
     
     
     var root = new THREE.Group();
-   scene.add(root);
-   root.add(sphere);
-   camera.position.z = 0;
+    scene.add(root);
+  
+
 
     /* Load Model */
     var threeGLTFLoader = new THREE.GLTFLoader();
@@ -119,20 +118,20 @@ function start( container, marker, video, input_width, input_height, canvas_draw
      
 
             threeGLTFLoader.load("./models/test2.glb", function (gltf) {
-            model = gltf.scene;//.children[2];
-            //model.name = "test2";
+            model = gltf.scene.children[2];
+            model.name = "test2";
             // gltf.flatShading;
-            //model.castShadow = true;
-            //model.receiveShadow = true;
+            model.castShadow = true;
+            model.receiveShadow = true;
             //gltf.frustumCulled = false;
             //THREE.DRACOLoader.releaseDecoderModule();
 
             model.rotation.x = 0*Math.PI;
             model.rotation.y = 1*Math.PI;
             model.position.z = 0;
-            //model.position.x = 100;
-            // model.position.y = 100;
-            model.scale.set(200,200,200);
+            model.position.x = 200;
+            model.position.y = 200;
+            model.scale.set(40,40,40);
             
      
             var animation = gltf.animations[0];
@@ -142,14 +141,14 @@ function start( container, marker, video, input_width, input_height, canvas_draw
             action.play();
 
             root.matrixAutoUpdate = false;
-            root.add(model);
+           
             //ここ追加
             //var dimensions = new THREE.Box3().setFromObject(model);
-            //objPositions = {
-              //  width: dimensions.max.x - dimensions.min.x,
-                //height: dimensions.max.y - dimensions.min.y,
+            //    objPositions = {
+            //    width: dimensions.max.x - dimensions.min.x,
+            //    height: dimensions.max.y - dimensions.min.y
             //};
-            
+            root.add(model); 
             
         }
     );
@@ -250,17 +249,17 @@ function start( container, marker, video, input_width, input_height, canvas_draw
             msg.width = msg.width/10;
             msg.height = msg.height/10;
             //追加
-           /* if (!window.firstPositioning) {
+           if (!window.firstPositioning) {
                 window.firstPositioning = true;
-                model.position.y = (msg.width / msg.dpi/2.5) * 1000 / objPositions.width;
-                model.position.x = (msg.height / msg.dpi/2.5) * 1000 / objPositions.height;
+                //model.position.y = (msg.width / msg.dpi) * 1000 / objPositions.width;
+                //model.position.x = (msg.height / msg.dpi) * 1000 / objPositions.height;
             }
             console.log("NFT width: ", msg.width);
             console.log("NFT height: ", msg.height);
             console.log("NFT dpi: ", msg.dpi);
-            var o_view = scene.getObjectByName('test2');
-            console.log(o_view);
-*/
+           // var o_view = scene.getObjectByName('test2');
+           // console.log(o_view);
+
         }
     };
     
@@ -279,25 +278,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
         ]);
     }
 
-    /*
-    var positionsinc = function (){
-        var sx,sy,sz;
-        var srx,sry,srz;
-        var rposi = "sphere.position";
-        var rrota = "sphere.rotation";
-    
-        sx = rposi.x;
-        sy = rposi.y;
-        sz = rposi.z;
-        srx = rrota.x;
-        sry = rrota.y;
-        srz = rrota.z;
-
-        obje.position.set(sx,sy,sz);
-        obje.rotation.set(srx,sry,srz);
-        
-    }*/
-
+   
 
     var tick = function() {
         draw();
@@ -316,10 +297,8 @@ function start( container, marker, video, input_width, input_height, canvas_draw
 
         if (!world) {
             root.visible = false;
-           // obje.visible = false;
         } else {
             root.visible = true;
-          //  obje.visible = true;
 
 
             // interpolate matrix
