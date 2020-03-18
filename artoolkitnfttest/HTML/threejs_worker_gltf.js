@@ -64,7 +64,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
         canvas: canvas_draw,
         alpha: true,
         antialias: true,
-        precision: 'lowp'//'mediump'
+        precision: 'mediump'//'lowp'
         
     });
     renderer.setPixelRatio(window.devicePixelRatio);
@@ -74,7 +74,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     //renderer.shadowMap.enabled = true;
     //renderer.setClearColor(0x000000, 0);
     //renderer.sortObjects = false;
-    renderer.gammaInput =true;
+    //renderer.gammaInput =true;
     //renderer.autoClear = false;
     var scene = new THREE.Scene();
 
@@ -119,10 +119,10 @@ function start( container, marker, video, input_width, input_height, canvas_draw
 
             threeGLTFLoader.load("./models/test2.glb", function (gltf) {
             model = gltf.scene.children[2];
-            model.name = "test2";
+            //model.name = "test2";
             // gltf.flatShading;
-            model.castShadow = true;
-            model.receiveShadow = true;
+            //model.castShadow = true;
+           // model.receiveShadow = true;
             //gltf.frustumCulled = false;
             //THREE.DRACOLoader.releaseDecoderModule();
 
