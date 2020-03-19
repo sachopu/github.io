@@ -7,7 +7,7 @@ function isMobile() {
     return /Android|mobile|iPad|iPhone/i.test(navigator.userAgent);
 }
 
-var interpolationFactor = 2;
+var interpolationFactor = 1.5;
 
 var trackedMatrix = {
     // for interpolation
@@ -27,10 +27,10 @@ var trackedMatrix = {
 
 var markers = {
     pinball: {
-        width: 600,
-        height: 800,
-        dpi: 72,
-        url: "../DataNFT/mark2"
+        width: 1250,
+        height: 1667,
+        dpi: 150,
+        url: "../DataNFT/mark"
     }
 };
 
@@ -128,9 +128,9 @@ function start( container, marker, video, input_width, input_height, canvas_draw
             model.rotation.x = 0*Math.PI;
             model.rotation.y = 1*Math.PI;
             model.position.z = 5;
-            model.position.x = 100;
-            model.position.y = 100;
-            model.scale.set(80,80,80);
+            //model.position.x = 100;
+            //model.position.y = 100;
+            model.scale.set(120,120,120);
             
      
             var animation = gltf.animations[0];
@@ -142,11 +142,11 @@ function start( container, marker, video, input_width, input_height, canvas_draw
             root.matrixAutoUpdate = false;
            
             //ここ追加
-            //var dimensions = new THREE.Box3().setFromObject(model);
-            //    objPositions = {
-            //    width: dimensions.max.x - dimensions.min.x,
-            //    height: dimensions.max.y - dimensions.min.y
-            //};
+            var dimensions = new THREE.Box3().setFromObject(model);
+                objPositions = {
+                width: dimensions.max.x - dimensions.min.x,
+                height: dimensions.max.y - dimensions.min.y
+            };
             root.add(model); 
             scene.add(root);
             
@@ -241,7 +241,7 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     };
 
     var world;
-
+    var pos = 5;
     var found = function(msg) {
         if (!msg) {
             world = null;
@@ -252,8 +252,8 @@ function start( container, marker, video, input_width, input_height, canvas_draw
             //追加
            if (!window.firstPositioning) {
                 window.firstPositioning = true;
-                //model.position.y = (msg.width / msg.dpi) * 1000 / objPositions.width;
-                //model.position.x = (msg.height / msg.dpi) * 1000 / objPositions.height;
+                model.position.y = (msg.width / msg.dpi * pos) * 1000 / objPositions.width;
+                model.position.x = (msg.height / msg.dpi * pos) * 1000 / objPositions.height;
             }
             console.log("NFT width: ", msg.width);
             console.log("NFT height: ", msg.height);

@@ -8,7 +8,7 @@
 </head>
 
 <body>
-  <div id="loading" />
+  <div id="loading">
   <img src="logo.gif">
   <span class="loading-text">Loading, please wait</span>
 </div>
@@ -26,8 +26,6 @@
 
   <script language="JavaScript" type="text/javascript" src="three.min.js"></script>  
   <script language="JavaScript" type="text/javascript" src="GLTFLoader.js"></script>
-  <script src="draco_decoder.js"></script>
-  <script src="DRACOLoader.js"></script>
   <script language="JavaScript" type="text/javascript" src="threejs_worker_gltf.js"></script>
   <script>
       /**
@@ -36,6 +34,11 @@
       var container = document.getElementById("app");
       var video = document.getElementById("video");
       var canvas = document.getElementById("canvas");
+
+      var hint = {
+          audio: false,
+          video: true
+        };
 
       if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         var hint = {
