@@ -27,9 +27,9 @@ var trackedMatrix = {
 
 var markers = {
     pinball: {
-        width: 1250,
-        height: 1667,
-        dpi: 150,
+        width: 600,
+        height: 800,
+        dpi: 72,
         url: "../DataNFT/mark2"
     }
 };
@@ -107,10 +107,6 @@ function start( container, marker, video, input_width, input_height, canvas_draw
     );
     sphere.scale.set(1000,1000,1000);*/
     
-    
-    var root = new THREE.Group();
-    
-  
 
 
     /* Load Model */
@@ -120,7 +116,9 @@ function start( container, marker, video, input_width, input_height, canvas_draw
      
 
             threeGLTFLoader.load("./models/test2.glb", function (gltf) {
+            gltf.doubleSided = false;
             model = gltf.scene;//children[2];
+
             //model.name = "test2";
             // gltf.flatShading;
             //model.castShadow = true;
