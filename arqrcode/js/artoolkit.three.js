@@ -278,10 +278,10 @@
 				var marker = ev.data.marker;
 				var obj;
 				if (ev.data.type === artoolkit.PATTERN_MARKER) {
-					obj = this.threePatternMarkers[marker.idPatt];
+					obj = this.threePatternMarkers[ev.data.marker.idPatt];
 
 				} else if (ev.data.type === artoolkit.BARCODE_MARKER) {
-					obj = this.threeBarcodeMarkers[marker.idMatrix];
+					obj = this.threeBarcodeMarkers[ev.data.marker.idMatrix];
 
 				}
 				if (obj) {
@@ -294,36 +294,14 @@
 				Listen to getNFTMarker events to keep track of Three.js markers.
 			*/
 			this.addEventListener('getNFTMarker', function(ev) {
-                var marker = ev.data.marker;
+				var marker = ev.data.marker;
 				var obj;
 
-                console.log('Found NFT marker', marker, obj);
-
-				obj = this.threeNFTMarkers[marker.id];
+				obj = this.threeNFTMarkers[ev.data.marker.id];
 
 				if (obj) {
 					obj.matrix.fromArray(ev.data.matrixGL_RH);
 					obj.visible = true;
-				}
-            });
-
-            /*
-				Listen to lostNFTMarker events to keep track of Three.js markers.
-			*/
-			this.addEventListener('lostNFTMarker', function(ev) {
-                var marker = ev.data.marker;
-				var obj;
-
-                console.log('Lost NFT marker', marker, obj);
-
-				obj = this.threeNFTMarkers[marker.id];
-
-				if (obj) {
-                    obj.matrix.fromArray(ev.data.matrixGL_RH);
-
-                    // TODO make it maybe more stable, making the object not visible
-                    // only after some ms of lost tracking?
-					obj.visible = false;
 				}
 			});
 

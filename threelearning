@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <script scr="https://cdnjs.cloudflare.com/ajax/libs/three.js/105/three.min.js"></script>
+</head>
+    <body>
+        <canvas id="myCanvas"></canvas>
+        <script>
+            //読み込み中
+            window.addEventListener('load',init);
+
+            function init() {
+
+                const width = 960;
+                const height = 540;
+
+                //レンダラー定義　
+                const rendere = new THREE.webGLRenderer({
+                    canvas: document.querySelector('#myCanvas')
+                });
+                rendere.setPixelRatio(window.devicePixelRatio);
+                rendere.setSize(width, height);
+
+                //シーン作成
+                const scene = new THREE.Scene();
+
+                //カメラ作成
+                const camera = new THREE.PerspectiveCamera(45,width / height);
+                camera.position.set(0, 0, +1000);
+
+                //3Dモデル作成
+                const geometry = new THREE.BoxGeometry(400,400,400);
+                const material = new THREE.MeshNormalMaterial();
+                const box = new THREE.Mesh(geometry, material);
+                scene.add(box);
+
+
+                //毎フレーム実行関数　A
+                tick();
+
+                //毎フレーム実行されるループイベント　Aとする
+                function tick() {
+                    box.rotation.y += 0.01; //とりあえず動き 
+                    renderer.render(scene, camera); //シーンとカメラレンダリング
+                    requestAnimationFrame(tick);
+                }
+
+            }
+        </script>
+
+    </body>
+</html>
