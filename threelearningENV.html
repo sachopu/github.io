@@ -48,10 +48,10 @@
                 renderer.setSize(width, height);
                 
                 ////////////////////////////////////////////////////////
-               
-                //サイズ変更検出   　1
+                //windowサイズ変更を検出してカメラレンダラーサイズを再取得する
+                //サイズ変更検出したときonResizeファンクションを実行  1
                 window.addEventListener('resize', onResize);
-                //リサイズ処理    　2
+                //onResizeリサイズ処理 カメラアスペクト比とレンダラーサイズをwindow.innerWidthで更新   2
                 function onResize(){ 
                     
                     //サイズを取得　
@@ -70,33 +70,54 @@
                 ////////////////////////////////////////////////////////////////
                 
                 //3Dモデル作成
-
-                var geometry = new THREE.BoxGeometry(10,10,10);
-                //マテリアル
-                const material = new THREE.MeshNormalMaterial();
+                //ジオメトリ作成
+                var box;
+                createbox();
+                function createbox(){
+                let geometry = new THREE.BoxGeometry(10,10,10);
+                //マテリアル作成
+                let material = new THREE.MeshNormalMaterial();
+                //ジオメトリとマテリアルをパラメータにしたメッシュ作成
+                box = new THREE.Mesh(geometry, material);
+                }
+                //スカイボックス作成テス
                
-            
-                skybox();
-                function skybox (){
-                    const cubeTexLoader = new THREE.CubeTextureLoader();
+                const texturName = './skybox-0'; //ラスト一桁をのぞくテクスチャパスとファイルネーム
+                const format = '.jpg';  //画像フォーマット
+                
+                var urls = [];　//この配列にcubeテクスチャのファイル6枚を格納するのにforとpush
+                for (var i = 1; i < 7; i++) {
+                    var x = texturName + i + format;
+                    urls.push(x);
+                }
+                
+                console.log(urls);
+                //キューブマップ用のテクスチャローダー
+                var cubeTexLoader = new THREE.CubeTextureLoader();
+                //ローダーへ画像urlを渡す、関数の引数にたぶんなる
+                cubeTexLoader.load(urls, function(tex){
+                    //シェーダー作成
+                    var shader = THREE.ShaderLib['cube'];
+                    shader.uniforms['tCube'].value = tex;
 
-                    const texture1 = "skybox-01.png";
-                    const texture2 = "skybox-02.png";
-                    const texture3 = "skybox-03.png";
-                    const texture4 = "skybox-04.png";
-                    const texture5 = "skybox-05.png";
-                    const texture6 = "skybox-06.png";
+                    var skyboxmaterial = new THREE.ShaderMaterial({
+                        fragmentShader : shader.fragmentShader,
+                        vertexShader : shader.vertexShader,
+                        uniforms : shader.uniforms,
+                        depthWrite : false,
+                        side: THREE.BackSide //裏をれんだ
 
-                    const urls = [ texture1, 
-                                texture2,
-                                texture3, 
-                                texture4,
-                                texture5, 
-                                texture6 ];
+                    });
+                    var skybox = new THREE.Mesh(new THREE.BoxGeometry(200,200,200),
+                    skyboxmaterial);
+                    scene.add(skybox);
+                });
 
-                    cubeTexLoader.load( urls, function(tex) {
-                        const cubeShader = THREE.ShaderLib[ 'cube' ];
-                        cubeShader.uniforms[ 'tCube' ].value = tex;
+/*
+                 cubeTexLoader.load( urls, function(tex) {
+                    tex.minFilter = THREE.LinearFilter
+                    const cubeShader = THREE.ShaderLib[ 'cube' ];
+                    cubeShader.uniforms[ 'tCube' ].value = tex;
 
                         const skyBoxMaterial = new THREE.ShaderMaterial({
                             fragmentShader: cubeShader.fragmentShader,
@@ -105,15 +126,11 @@
                             depthWrite: false,
                             side: THREE.BackSide
                         });
-                        const mesh = new THREE.Mesh( new THREE.BoxGeometry( 3000, 3000, 3000, 1, 1, 1 ), 
+                        const skybox = new THREE.Mesh( new THREE.BoxGeometry( 3000, 3000, 3000, 1, 1, 1 ), 
                                                   skyBoxMaterial);
-                        scene.add( mesh );
+                        scene.add( skybox );
                    }
-                );
-                }
-
-                
-                
+                ); */               
                 
                 /* const box = new THREE.Mesh(geometry, material);
                 scene.add(box);
@@ -142,11 +159,10 @@
 
                 //毎フレーム実行されるループイベント　Aとする
                 function tick() {
-                    box.rotation.y += 0.01; //とりあえず動き 
+                   box.rotation.y += 0.01; //とりあえず動き 
                    // envmesh.rotation.y += 0.01;
                     renderer.render(scene, camera); //シーンとカメラレンダリング
-                    mesh.rotation.y +=0.01;
-                    mesh.rotation.x +=0.01;
+
                     
                     //requestAnimationFrame()は引数として渡された関数を、毎フレーム実行します。
                     requestAnimationFrame(tick);
