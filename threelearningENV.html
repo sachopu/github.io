@@ -73,18 +73,49 @@
 
                 var geometry = new THREE.BoxGeometry(10,10,10);
                 //マテリアル
-                //const material = new THREE.MeshNormalMaterial();
-                var cubeLoader = new THREE.CubeTextureLoader();
-                
-                cubeLoader.load('lok-yiu-cheung-o6k0ZH1eOwg-unsplash.jpg', function( cubeTexture){
-	               var material = new THREE.MeshPhongMaterial({
-                    color: 0xCCCCCC,
-                    envMap: cubeTexture,
-                    reflectivity: 0.9
-                    });
-                });
+                const material = new THREE.MeshNormalMaterial();
+               
             
-               /* const box = new THREE.Mesh(geometry, material);
+                skybox();
+                function skybox (){
+                    const cubeTexLoader = new THREE.CubeTextureLoader();
+
+                    const texture1 = "skybox-01.png";
+                    const texture2 = "skybox-02.png";
+                    const texture3 = "skybox-03.png";
+                    const texture4 = "skybox-04.png";
+                    const texture5 = "skybox-05.png";
+                    const texture6 = "skybox-06.png";
+
+                    const urls = [ texture1, 
+                                texture2,
+                                texture3, 
+                                texture4,
+                                texture5, 
+                                texture6 ];
+
+                    cubeTexLoader.load( urls, function(tex) {
+                        const cubeShader = THREE.ShaderLib[ 'cube' ];
+                        cubeShader.uniforms[ 'tCube' ].value = tex;
+
+                        const skyBoxMaterial = new THREE.ShaderMaterial({
+                            fragmentShader: cubeShader.fragmentShader,
+                            vertexShader: cubeShader.vertexShader,
+                            uniforms: cubeShader.uniforms,
+                            depthWrite: false,
+                            side: THREE.BackSide
+                        });
+                        const mesh = new THREE.Mesh( new THREE.BoxGeometry( 3000, 3000, 3000, 1, 1, 1 ), 
+                                                  skyBoxMaterial);
+                        scene.add( mesh );
+                   }
+                );
+                }
+
+                
+                
+                
+                /* const box = new THREE.Mesh(geometry, material);
                 scene.add(box);
                 
                 env('lok-yiu-cheung-o6k0ZH1eOwg-unsplash.jpg');
@@ -114,6 +145,8 @@
                     box.rotation.y += 0.01; //とりあえず動き 
                    // envmesh.rotation.y += 0.01;
                     renderer.render(scene, camera); //シーンとカメラレンダリング
+                    mesh.rotation.y +=0.01;
+                    mesh.rotation.x +=0.01;
                     
                     //requestAnimationFrame()は引数として渡された関数を、毎フレーム実行します。
                     requestAnimationFrame(tick);
