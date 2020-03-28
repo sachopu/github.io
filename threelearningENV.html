@@ -13,6 +13,7 @@
     
     <!--threeの読み込み-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/105/three.min.js"></script>
+    <script src="./OrbitControls.js"></script>
 </head>
     <body>
         <canvas id="myCanvas"></canvas>
@@ -38,7 +39,8 @@
                 //カメラ作成
                                 
                 camera = new THREE.PerspectiveCamera( 75, width / height, 1, 1100 );
-				camera.target = new THREE.Vector3( 0, 0, 0 );
+                camera.target = new THREE.Vector3( 0, 0, 0 );
+
 
                  //レンダラー定義　
                 const renderer = new THREE.WebGLRenderer({
@@ -69,6 +71,9 @@
                 
                 ////////////////////////////////////////////////////////////////
                 
+                //カメラコントロール
+                var controls = new THREE.OrbitControls(camera);
+
                 //3Dモデル作成
                 //ジオメトリ作成
                 var box;
@@ -83,7 +88,7 @@
                 //スカイボックス作成テス
                
                 const texturName = './skybox-0'; //ラスト一桁をのぞくテクスチャパスとファイルネーム
-                const format = '.jpg';  //画像フォーマット
+                const format = '.png';  //画像フォーマット
                 
                 var urls = [];　//この配列にcubeテクスチャのファイル6枚を格納するのにforとpush
                 for (var i = 1; i < 7; i++) {
@@ -159,6 +164,7 @@
 
                 //毎フレーム実行されるループイベント　Aとする
                 function tick() {
+                    controls.update();
                    box.rotation.y += 0.01; //とりあえず動き 
                    // envmesh.rotation.y += 0.01;
                     renderer.render(scene, camera); //シーンとカメラレンダリング
