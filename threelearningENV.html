@@ -12,7 +12,7 @@
     </style>
     
     <!--threeの読み込み-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/105/three.min.js"></script>
+    <script src="./three.min.js"></script>
     <script src="./OrbitControls.js"></script>
 </head>
     <body>
@@ -32,6 +32,13 @@
                 const width = 960;
                 const height = 540;
                 */
+                //レンダラー定義　
+                const renderer = new THREE.WebGLRenderer({
+                canvas: document.querySelector('#myCanvas')
+                });
+                renderer.setPixelRatio(window.devicePixelRatio);
+                renderer.setSize(width, height);
+                
                                    
                 //シーン作成
                 const scene = new THREE.Scene();
@@ -39,16 +46,16 @@
                 //カメラ作成
                                 
                 camera = new THREE.PerspectiveCamera( 75, width / height, 1, 1100 );
-                camera.target = new THREE.Vector3( 0, 0, 0 );
-
-
-                 //レンダラー定義　
-                const renderer = new THREE.WebGLRenderer({
-                canvas: document.querySelector('#myCanvas')
-                });
-                renderer.setPixelRatio(window.devicePixelRatio);
-                renderer.setSize(width, height);
+                //camera.target = new THREE.Vector3( 0, 0, 0 );
                 
+                //カメラコントロール
+                var controls = new THREE.OrbitControls(camera,myCanvas);
+                camera.position.set( 0,20,100 );
+                controls.target.set(0, 0, 0);
+                scene.add(camera);
+                controls.update();
+
+
                 ////////////////////////////////////////////////////////
                 //windowサイズ変更を検出してカメラレンダラーサイズを再取得する
                 //サイズ変更検出したときonResizeファンクションを実行  1
@@ -70,21 +77,12 @@
                 }
                 
                 ////////////////////////////////////////////////////////////////
-                
-                //カメラコントロール
-                var controls = new THREE.OrbitControls(camera);
+
 
                 //3Dモデル作成
-                //ジオメトリ作成
-                var box;
-                createbox();
-                function createbox(){
-                let geometry = new THREE.BoxGeometry(10,10,10);
-                //マテリアル作成
-                let material = new THREE.MeshNormalMaterial();
-                //ジオメトリとマテリアルをパラメータにしたメッシュ作成
-                box = new THREE.Mesh(geometry, material);
-                }
+                
+
+
                 //スカイボックス作成テス
                
                 const texturName = './skybox-0'; //ラスト一桁をのぞくテクスチャパスとファイルネーム
@@ -99,8 +97,36 @@
                 console.log(urls);
                 //キューブマップ用のテクスチャローダー
                 var cubeTexLoader = new THREE.CubeTextureLoader();
-                //ローダーへ画像urlを渡す、関数の引数にたぶんなる
-                cubeTexLoader.load(urls, function(tex){
+                //ローダーへ画像url配列を渡す
+                var texCube = new THREE.CubeTextureLoader().load(urls);
+                //一応配列内容をログる
+                console.log(texCube);
+                //シーンのバックグラウンドに貼る
+                scene.background = texCube;
+                
+
+                //boxジオメトリ作成
+                var box;
+                createbox();//ファンクションcreatebox実行
+                
+                //////////////////////////////////////////////////////
+                //box作成関数
+                
+                function createbox(){
+                let geometry = new THREE.BoxGeometry(100,100,100);
+                //マテリアル作成
+                //let material = new THREE.MeshNormalMaterial();
+                var material = new THREE.MeshBasicMaterial( { 
+                    color: 0xffffff, envMap: texCube } );
+   
+                //ジオメトリとマテリアルをパラメータにしたメッシュ作成
+                box = new THREE.Mesh(geometry, material);
+                scene.add(box);//配置
+                 }
+                 //////////////////////////////////////////////////////
+
+
+                /*cubeTexLoader.load(urls, function(tex){
                     //シェーダー作成
                     var shader = THREE.ShaderLib['cube'];
                     shader.uniforms['tCube'].value = tex;
@@ -116,7 +142,7 @@
                     var skybox = new THREE.Mesh(new THREE.BoxGeometry(200,200,200),
                     skyboxmaterial);
                     scene.add(skybox);
-                });
+                });*/
 
 /*
                  cubeTexLoader.load( urls, function(tex) {
@@ -164,7 +190,7 @@
 
                 //毎フレーム実行されるループイベント　Aとする
                 function tick() {
-                    controls.update();
+                   controls.update();
                    box.rotation.y += 0.01; //とりあえず動き 
                    // envmesh.rotation.y += 0.01;
                     renderer.render(scene, camera); //シーンとカメラレンダリング
