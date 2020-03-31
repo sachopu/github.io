@@ -116,8 +116,8 @@
                 let geometry = new THREE.BoxGeometry(100,100,100);
                 //マテリアル作成
                 //let material = new THREE.MeshNormalMaterial();
-                var material = new THREE.MeshBasicMaterial( { 
-                    color: 0xffffff, envMap: texCube } );
+                var material = new THREE.MeshStandardMaterial( { 
+                    color: 0xffffff, roughness: 0.2, metalness: 1 ,envMap: texCube } );
    
                 //ジオメトリとマテリアルをパラメータにしたメッシュ作成
                 box = new THREE.Mesh(geometry, material);
