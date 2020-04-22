@@ -1,0 +1,261 @@
+<script src='./aframe-master.min.js'></script>
+<script src='./aframe-extras.min.js'></script>
+<script src='./aframe-sprite-particles-component.js'></script>
+<script src='./aframe-ar.js'></script>
+<script>
+    window.addEventListener('camera-init', (data) => {
+      console.log('camera-init', data);
+    })
+    window.addEventListener('camera-error', (error) => {
+        console.log('camera-error', error);
+    })
+    
+    AFRAME.registerComponent('registerevents', {
+		init: function () {
+			var marker = this.el;
+
+			marker.addEventListener('markerFound', function() {
+				var markerId = marker.id;
+				console.log('markerFound', markerId);
+        
+        var honou = document.querySelector("#honou"); 
+        honou.setAttribute('sprite_particles__fire',{enable: true, delay: 3,spawnRate: 20 });
+                  var b = honou.getAttribute('sprite_particles__fire');
+                  console.log(b);
+        /*
+        var ani1 = document.querySelector("#ani1");
+        var ani2 = document.querySelector("#ani2");
+        var ani3 = document.querySelector("#ani3");
+
+        aniemit(ani1);
+        aniemit(ani2);
+        aniemit(ani3);
+        */
+        var aArray = new Array("#ani","#ani1","#ani2","#ani3");
+        aArray.forEach(value => {
+          var foundelements = document.querySelector( value );
+          aniemit(foundelements);
+          
+        });
+        
+        function aniemit(ani){
+          ani.emit("found");
+        };
+				// TODO: Add your own code here to react to the marker being found.
+			});
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			marker.addEventListener('markerLost', function() {
+				var markerId = marker.id;
+				console.log('markerLost', markerId);
+        
+        var honou = document.querySelector("#honou"); 
+        honou.setAttribute('sprite_particles__fire',{enable: false, delay: 0 ,spawnRate: 0});
+                  var b = honou.getAttribute('sprite_particles__fire');
+                  console.log(b);
+        /*
+        var bArray = new Array("#ani","#ani1","#ani2","#ani3");
+       
+        bArray.forEach(value =>{
+          var lostelements = documet.querySelector( value );
+          aniemitlost(lostelemenst);
+        });
+        
+        function aniemitlost(ani){
+          ani.emit("lost");
+        };
+        */
+       // ani.pause();
+				// TODO: Add your own code here to react to the marker being lost.
+			});
+		}
+	});
+				// TODO: Add your own code here to react to the marker being found.
+     /*AFRAME.registerComponent('starthandler', {
+            init: function () {
+                var marker = this.el;
+
+
+
+                marker.addEventListener('markerFound', function () {
+
+                this.honou = document.querySelector("#honou");
+                 var a = new Array();
+                 
+                  a[0] = ' <a-entity ';
+                  a[1] = ' position="0 80 -20" ';
+                  a[2] = ' scale="160 160 160" ';
+                  a[3] = ' sprite_particles__fire=" ';
+                  a[4] = ' enable: true; ';
+                  a[5] = ' delay:3; depthTest:true; '; 
+                  a[6] = ' depthWrite: false; ';
+                  a[7] = ' position: 0 -1 -0.5..1 1 0.5; ';
+                  a[8] = ' texture: assets/explosion_sheet.png; '; 
+                  a[9] = ' textureFrame: 5 5; ';
+                  a[10] = ' velocity: 0.2 0.1 -0.2..-0.6 -0.1 0.2; '; 
+                  a[11] = ' acceleration: 0 1 0..0 3 0; '; 
+                  a[12] = ' spawnRate: 20; ';
+                  a[13] = ' scale: 1000,1800..1800,2400; '; 
+                  a[14] = ' lifeTime: 1..2; ';
+                  a[15] = ' opacity: 1,0; ';
+                  a[16] = ' angularVelocity: 0 0 0; ';
+                  a[17] = ' blending: additive ';
+                  a[18] = ' "> ';
+                  a[19] = ' </a-entity> ';
+                  
+                  var youso =a.join("");
+                  
+                  console.log(youso);  
+                  this.honou.innerHTML = youso;
+                  */
+                  //下の　entity.setAttribute()　を使うほうがスマートだが、再検出時に全体の書き換えが起きないのでパーティクルが途切れないので却下 
+                  //下を使用する場合はidはエレメントのあるタグにつける（現在は全書き換えなので包括したentityにid入れてます）
+                  /*
+                  honou.setAttribute('sprite_particles__fire',{enable: true, delay: 5});
+                  var b = honou.getAttribute('sprite_particles__fire');
+                  console.log(b);
+                  */
+
+              
+                
+                //マーカーロストイベントで書き換え。スプライトパーティクルだと上の検出時にinnerHTMLで全て書き換えたほうがよさそう
+</script>
+
+<!--
+<style>
+  .arjs-loader {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .arjs-loader div {
+    text-align: center;
+    font-size: 1.25em;
+    color: white;
+  }
+</style>
+-->
+<!-- rawgithack development URL -->
+<style>
+  .MarkerLink {
+    z-index: 9999;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    height: 5%;
+    width: 20%;
+    top: 3%;
+    left: 3%;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: red;
+  }
+  #linktext:hover{
+    font-size: 1.2em;
+    color: red;
+  }
+  :visited{color:silver;}
+</style>
+
+<body style='margin : 0px; overflow: hidden;'>
+   <!-- minimal loader shown until image descriptors are loaded -->
+  <div class="MarkerLink">
+    <div><a id="linktext" href="./pattern-ususamanft-02.png" target="_brank">◆MarkerPattern...</a></div>
+  </div>
+
+    <a-scene
+        vr-mode-ui='enabled: false;'
+        renderer="logarithmicDepthBuffer: true;"
+        renderer="gammaOutput: true;"
+        
+        embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false;matrixCodeType: 3x3; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960;'
+        >
+        <a-assets>
+          <a-mixin id="modelin" animation__1="property: scale; from:0 10 0; to:1.5 1.5 1.5; easing: easeInOutExpo; dur: 300; startEvents:found;">
+          <a-mixin id="bonG" geometry="primitive: plane; height:20; width:20" ></a-mixin>
+          <a-mixin id="size" animation__1="property: scale; from:80 80 80; to:1 1 1; easing: easeInOutExpo; dur: 1000; startEvents:found;"></a-mixin>
+          <a-mixin id="spinAnimation" animation="property: object3D.rotation.z; to: 360; loop: true; easing:easeInCirc; dur: 6000; startEvents:found;"></a-mixin>
+          <a-mixin id="framein" animation="property: position; from:10 10 10; to:0 2.1 0; dur: 3000; delay: 3; startEvents:found;"></a-mixin>  
+          <a-mixin id="framein2" animation="property: position; from:-10 -10 -10; to:0 -2.1 0; dur: 3000; delay: 3; startEvents:found;"></a-mixin>  
+          <a-mixin id="spinorbit" src="#bonji" position="0 2.1 0.5" width="1" height="1" tranceparent="true" opacity="1" material="shader: standard; emissive:#000; color:#111" 
+          animation__0="property: rotation; to: 0 0 -360; loop: true; easing: linear; dur: 2000;";
+          animation__1="property: components.material.material.opacity; type: opacity; from: 1; to: 1; 
+          loop: true; easing: easeInElastic; dur: 1000"></a-mixin>
+          <img id="bonji" src="bonji.png">
+  
+      </a-assets>
+
+        <!-- use rawgithack to retrieve the correct url for nft marker (see 'pinball' below) -->
+        <!--<a-marker type="pattern" id='marker-hiro'  registerevents>-->
+        <a-marker type='pattern' url='./pattern-ususamanft-02.patt' id='marker-ususama'  registerevents>
+          <a-entity rotation="-90 0 0">
+          <a-entity
+            id="ani"
+            mixin="modelin"
+            gltf-model='./ususama.glb'
+            scale="0 0 0"
+            position="-0.1 0.3 0"
+            rotation="0 -20 0"
+            animation-mixer>
+           </a-entity>          
+           <a-entity position="0 1 -1"
+                scale="1 2 1"
+                sprite_particles__sparks="
+                position: -2 -5 -2..2 2 2; depthTest:false; color: yellow, red; 
+                spawnRate: 100; lifeTime: 0.3..2; velocity: 0 2.5..0 4.5; angularVelocity: -10 0 -10..10 0 10; 
+                scale: 0..0.5,0..0.1">
+            </a-entity>
+           <a-entity
+            position="0 1 -1"
+            scale="1 1 1"
+            sprite_particles__smoke="
+                delay: 5; position: -1 -1 -1..2 2 2;texture: assets/fog.png; 
+                velocity: -.1 1 -.3.. .3 1 .3; spawnRate: 12; 
+                lifeTime: 2; scale: 10,20; opacity: 0,0.2,0; 
+                color: #666,#222; rotation: -120..120"
+            sprite_particles__sparks="
+                position: -0.5 -2 -1..0.5 -0.5 0; color: 
+                yellow, red; spawnRate: 10; lifeTime: 0.3..0.7; velocity: 0 2.5..0 4.5; 
+                angularVelocity: -20 -20 -20..20 20 20; scale: .0.2...1; acceleration: -1 -0.2 0..1 1 0;">
+                
+           </a-entity>
+           <a-entity>
+              <a-entity  id="honou"
+                  position="-0.3 0 0"
+                  scale="1 1 1"
+                  sprite_particles__fire="
+                  enable:false;
+                  delay:3; depthTest:true; depthWrite:false; 
+                  position: 0 -1 -0.5..1 1 0.5 ; texture: assets/explosion_sheet.png; 
+                  textureFrame: 5 5; velocity: 0.2 0.5 -0.2..-0.6 -0.8 0.2; 
+                  acceleration: 0 1 0..0 3 0; spawnRate: 20; scale: 10,20..20,40; 
+                  lifeTime: 1..2; opacity: 1,0; angularVelocity: 0 0 0; blending: additive">
+                </a-entity>
+           </a-entity>
+           
+
+        <a-entity  scale="1 1 1" position="0 0 0" >
+        <a-entity id="ani1" mixin="size spinAnimation">
+            <a-image  src="#bonji" width="3" height="3" tranceparent="true" opacity="1" material="shader: standard; emissive:#000; color:#000"
+            animation="property: components.material.material.opacity; type: opacity; from: 1; to: 1; 
+            loop: true; easing: easeInOutElastic; dur: 100; dir: alternate"></a-entity>
+                
+                <a-entity mixin="spinAnimation" animation="dur: 5000">
+                <a-image id="ani2" mixin="framein spinorbit" src="#bonji" position="20 20 20;" width="1" height="1" tranceparent="true" opacity="1" material="shader: standard; emissive:#000; color:#000" ></a-entity>
+                
+                <a-entity mixin="spinAnimation" animation="dur: 5000">
+                    <a-image id="ani3" mixin="framein2 spinorbit" src="#bonji" position="-20 -20 -20;" width="1" height="1"  tranceparent="true" opacity="1" material="shader: standard; emissive:#000; color:#000" ></a-entity>
+        </a-entity>
+        </a-marker>
+        <a-light type="ambient" intensity="4" color="#ffffff"></a-light>
+        <a-light type="point" intensity="0" position="2 1 1"></a-light>
+		<a-entity camera></a-entity>
+    </a-scene>
+</body>
