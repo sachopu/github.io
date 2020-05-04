@@ -1,0 +1,52 @@
+<script src='./aframe-master.min.js'></script>
+<script src='./aframe-extras.min.js'></script>
+<script src='./aframe-ar.js'></script>
+<script>
+    window.addEventListener('camera-init', (data) => {
+      console.log('camera-init', data);
+    })
+    window.addEventListener('camera-error', (error) => {
+        console.log('camera-error', error);
+    })
+    //マーカーファウンドイベント
+    AFRAME.registerComponent('registerevents', {
+		init: function () {
+			var marker = this.el;
+
+			marker.addEventListener('markerFound', function() {
+				var markerId = marker.id;
+				console.log('markerFound', markerId);
+			});
+　　　//マーカーロストイベント
+			marker.addEventListener('markerLost', function() {
+				var markerId = marker.id;
+				console.log('markerLost', markerId);
+			});
+		}
+	});
+</script>
+
+<body style='margin : 0px; overflow: hidden;'>
+   <!-- minimal loader shown until image descriptors are loaded -->
+    <a-scene
+        vr-mode-ui='enabled: false;'
+        renderer="logarithmicDepthBuffer: true;"
+        renderer="gammaOutput: true;"
+        
+        embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false;matrixCodeType: 3x3; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960;'
+        >
+        <a-marker type='pattern' url='./pattern-ususamanft-02.patt' id='marker-ususama'  registerevents>
+           <a-entity
+            mixin="modelin"
+            gltf-model='./rakugakiman.glb'
+            scale="0.5 0.5 0.5"
+            position="0 0 0"
+            rotation="0 0 0"
+            animation-mixer>
+           </a-entity>          
+        </a-marker>
+        <a-light type="ambient" intensity="1" color="#ffffff"></a-light>
+        <a-light type="point" intensity="0" position="2 1 1"></a-light>
+		<a-entity camera></a-entity>
+    </a-scene>
+</body>
