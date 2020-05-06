@@ -38,14 +38,14 @@
         renderer="logarithmicDepthBuffer: true;"
         renderer="gammaOutput: true;"
         
-        embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled:false;'
+        embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled:false; matrixCodeType: 3x3; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960;'
         >
         <a-marker type='pattern' url='./rakugakimanQR.patt' id='marker-rakugakimanQR'  registerevents>
            <a-entity
             mixin="modelin"
             gltf-model='./rakugakiman.glb'
             scale="0.5 0.5 0.5"
-            position="0 0 0"
+            position="0 0.5 0"
             rotation="0 0 0"
             animation-mixer>
            </a-entity>          
